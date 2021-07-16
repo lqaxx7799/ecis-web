@@ -1,19 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Provider as FluentProvider, teamsTheme } from '@fluentui/react-northstar';
 
 import reportWebVitals from './reportWebVitals';
-import { store } from './store';
-import App from './App';
-
-import './index.css';
+import { store } from './app/store';
+import App from './app/App';
 
 ReactDOM.render(
-  <React.StrictMode>
+  <FluentProvider theme={teamsTheme}>
     <Provider store={store}>
-      <App />
+      <Router>
+        <Switch>
+          <Route path="/" component={App} />
+        </Switch>
+      </Router>
     </Provider>
-  </React.StrictMode>,
+  </FluentProvider>,
   document.getElementById('root')
 );
 

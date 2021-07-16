@@ -1,10 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
-import authReducer from './authSlice';
+import { createLogger } from 'redux-logger';
+import authReducer from '../store/authSlice';
+
+const getMiddleware = () => {
+  if (process.env.NODE_ENV === 'production') {
+    return [];
+  }
+  return [createLogger()];
+}
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
   },
+  middleware: getMiddleware(),
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
