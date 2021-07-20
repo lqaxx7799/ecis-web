@@ -2,22 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Provider as FluentProvider, teamsTheme } from '@fluentui/react-northstar';
 
 import reportWebVitals from './reportWebVitals';
 import { store } from './app/store';
 import App from './app/App';
 
+import 'normalize.css/normalize.css';
+import "@blueprintjs/core/lib/css/blueprint.css";
+import "@blueprintjs/icons/lib/css/blueprint-icons.css";
+import './styles/index.scss';
+
 ReactDOM.render(
-  <FluentProvider theme={teamsTheme}>
-    <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route path="/" component={App} />
-        </Switch>
-      </Router>
-    </Provider>
-  </FluentProvider>,
+  <Provider store={store}>
+    <Router>
+      <Switch>
+        <Route path="/" component={App} />
+      </Switch>
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 

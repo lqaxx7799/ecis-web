@@ -2,6 +2,8 @@ function isLoggedIn(): boolean {
   return true;
 }
 
-export default {
+const authServices = {
   isLoggedIn,
 };
+
+export default authServices;
