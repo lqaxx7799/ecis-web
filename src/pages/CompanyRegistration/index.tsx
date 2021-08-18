@@ -42,7 +42,10 @@ const CompanyRegistration = (props: Props) => {
                     {...field}
                     placeholder="Vui lòng nhập email doanh nghiệp"
                   />
-                  {errors.Email?.type === 'required' && <span>Không được để trống email doanh nghiệp</span>}
+                  {
+                    errors.Email?.type === 'required' &&
+                      <span className="error-message">Không được để trống email doanh nghiệp</span>
+                  }
                 </FormGroup>
               )}
             />
@@ -59,7 +62,10 @@ const CompanyRegistration = (props: Props) => {
                     {...field}
                     placeholder="Vui lòng nhập mã doanh nghiệp"
                   />
-                  {errors.CompanyCode?.type === 'required' && <span>Không được để trống mã doanh nghiệp</span>}
+                  {
+                    errors.CompanyCode?.type === 'required' &&
+                      <span className="error-message">Không được để trống mã doanh nghiệp</span>
+                  }
                 </FormGroup>
               )}
             />
@@ -76,7 +82,10 @@ const CompanyRegistration = (props: Props) => {
                     {...field}
                     placeholder="Vui lòng nhập tên doanh nghiệp tiếng Việt"
                   />
-                  {errors.CompanyCode?.type === 'required' && <span>Không được để trống tên doanh nghiệp tiếng Việt</span>}
+                  {
+                    errors.CompanyCode?.type === 'required' &&
+                      <span className="error-message">Không được để trống tên doanh nghiệp tiếng Việt</span>
+                  }
                 </FormGroup>
               )}
             />
