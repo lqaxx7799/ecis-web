@@ -1,7 +1,5 @@
-import React from 'react';
-import { Alignment, Button, Navbar } from '@blueprintjs/core';
-import BleedLayout from '../common/components/BleedLayout';
-import { Container } from 'react-grid-system';
+import { Button, Container } from '@mantine/core';
+import { Link } from 'react-router-dom';
 
 type Props = {
   children: JSX.Element;
@@ -9,19 +7,21 @@ type Props = {
 
 const MainLayout = ({ children }: Props) => {
   return (
-    <div>
-      <Navbar>
-        <Navbar.Group align={Alignment.LEFT}>
-          <Navbar.Heading>Hệ thống ECIS</Navbar.Heading>
-          <Navbar.Divider />
-          <Button minimal icon="home" text="Home" />
-          <Button minimal icon="document" text="Files" />
-        </Navbar.Group>
-      </Navbar>
-      <Container style={{ marginTop: '32px' }}>
+    <>
+      <div className="header">
+        <div className="header-main">
+          <Button component={Link} to="/">ECIS</Button>
+        </div>
+        <div className="spacer" />
+        <div className="header-end">
+          <Button style={{ marginRight: '8px' }}>Đăng nhập</Button>
+          <Button>Đăng ký</Button>
+        </div>
+      </div>
+      <Container className="layout-main">
         {children}
       </Container>
-    </div>
+    </>
   );
 }
 

@@ -7,19 +7,22 @@ import reportWebVitals from './reportWebVitals';
 import { store } from './app/store';
 import App from './app/App';
 
-import 'normalize.css/normalize.css';
-import "@blueprintjs/core/lib/css/blueprint.css";
-import "@blueprintjs/icons/lib/css/blueprint-icons.css";
 import './styles/index.scss';
+import { MantineProvider } from '@mantine/core';
+import { NotificationsProvider } from '@mantine/notifications';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <Switch>
-        <Route path="/" component={App} />
-      </Switch>
-    </Router>
-  </Provider>,
+  <MantineProvider>
+    <NotificationsProvider>
+      <Provider store={store}>
+        <Router>
+          <Switch>
+            <Route path="/" component={App} />
+          </Switch>
+        </Router>
+      </Provider>
+    </NotificationsProvider>
+  </MantineProvider>,
   document.getElementById('root')
 );
 
