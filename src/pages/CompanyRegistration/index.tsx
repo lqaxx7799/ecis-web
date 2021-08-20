@@ -19,45 +19,45 @@ const CompanyRegistration = (props: Props) => {
   const notifications = useNotifications();
 
   const [validation, setValidation] = useState<CompanyRegistrationDTO>({
-    Email: 'Không được để trống email doanh nghiệp',
-    CompanyCode: '',
-    CompanyNameEN: '',
-    CompanyNameVI: '',
+    email: 'Không được để trống email doanh nghiệp',
+    companyCode: '',
+    companyNameEN: '',
+    companyNameVI: '',
   });
   const form = useForm<CompanyRegistrationDTO>({
     initialValues: {
-      Email: '',
-      CompanyCode: '',
-      CompanyNameEN: '',
-      CompanyNameVI: '',  
+      email: '',
+      companyCode: '',
+      companyNameEN: '',
+      companyNameVI: '',  
     },
     validationRules: {
-      CompanyCode: (value) => !!value,
-      CompanyNameVI: (value) => !!value,
+      companyCode: (value) => !!value,
+      companyNameVI: (value) => !!value,
     },
   });
 
   const updateEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
-    form.setFieldValue('Email', value);
+    form.setFieldValue('email', value);
     if (!value) {
-      form.setFieldError('Email', true);
+      form.setFieldError('email', true);
       return setValidation({
         ...validation,
-        Email: 'Không được để trống email doanh nghiệp',
+        email: 'Không được để trống email doanh nghiệp',
       });
     }
     if (!EMAIL_REGEX.test(value)) {
-      form.setFieldError('Email', true);
+      form.setFieldError('email', true);
       return setValidation({
         ...validation,
-        Email: 'Email doanh nghiệp không hợp lệ',
+        email: 'Email doanh nghiệp không hợp lệ',
       });
     }
-    form.setFieldError('Email', false);
+    form.setFieldError('email', false);
     return setValidation({
       ...validation,
-      Email: '',
+      email: '',
     });
   };
 
@@ -68,16 +68,16 @@ const CompanyRegistration = (props: Props) => {
     if (isValid) {
       console.log(1111111, values);
       dispatch(companyActions.registerCompany(values))
-        .then((res) => {
+        .then((res: any) => {
           history.push('/dang-ky-thanh-cong');
         })
-        .catch((err) => {
+        .catch((err: any) => {
           console.log(1111111, err.response);
           if (err.response.status === 400) {
-            form.setFieldError('Email', true);
+            form.setFieldError('email', true);
             return setValidation({
               ...validation,
-              Email: err.response.data.message,
+              email: err.response.data.message,
             });
           }
           notifications.showNotification({
@@ -105,8 +105,8 @@ const CompanyRegistration = (props: Props) => {
             <TextInput
               required
               label="Email"
-              error={form.errors.Email && validation.Email}
-              value={form.values.Email}
+              error={form.errors.email && validation.email}
+              value={form.values.email}
               onChange={updateEmail}
               placeholder="Vui lòng nhập email doanh nghiệp"
               style={{ marginBottom: '12px' }}
@@ -115,9 +115,9 @@ const CompanyRegistration = (props: Props) => {
             <TextInput
               required
               label="Mã doanh nghiệp"
-              error={form.errors.CompanyCode && 'Không được để trống mã doanh nghiệp'}
-              value={form.values.CompanyCode}
-              onChange={(event) => form.setFieldValue('CompanyCode', event.currentTarget.value)}
+              error={form.errors.companyCode && 'Không được để trống mã doanh nghiệp'}
+              value={form.values.companyCode}
+              onChange={(event) => form.setFieldValue('companyCode', event.currentTarget.value)}
               placeholder="Vui lòng nhập mã doanh nghiệp"
               style={{ marginBottom: '12px' }}
             />
@@ -125,17 +125,17 @@ const CompanyRegistration = (props: Props) => {
             <TextInput
               required
               label="Tên doanh nghiệp (Tiếng Việt)"
-              error={form.errors.CompanyNameVI && 'Không được để trống tên doanh nghiệp tiếng Việt'}
-              value={form.values.CompanyNameVI}
-              onChange={(event) => form.setFieldValue('CompanyNameVI', event.currentTarget.value)}
+              error={form.errors.companyNameVI && 'Không được để trống tên doanh nghiệp tiếng Việt'}
+              value={form.values.companyNameVI}
+              onChange={(event) => form.setFieldValue('companyNameVI', event.currentTarget.value)}
               placeholder="Vui lòng nhập tên doanh nghiệp (Tiếng Việt)"
               style={{ marginBottom: '12px' }}
             />
 
             <TextInput
               label="Tên doanh nghiệp (Tiếng Anh)"
-              value={form.values.CompanyNameEN}
-              onChange={(event) => form.setFieldValue('CompanyNameEN', event.currentTarget.value)}
+              value={form.values.companyNameEN}
+              onChange={(event) => form.setFieldValue('companyNameEN', event.currentTarget.value)}
               placeholder="Vui lòng nhập tên doanh nghiệp (Tiếng Anh)"
               style={{ marginBottom: '12px' }}
             />

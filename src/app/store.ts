@@ -1,11 +1,10 @@
 import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { applyMiddleware, combineReducers, createStore, AnyAction } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import authReducer from '../common/reducers/auth';
+import authReducer, { AuthenticationActionTypes } from '../common/reducers/authentication.reducer';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
-import { AnyAction } from 'redux';
 
 const getMiddleware = () => {
   if (process.env.NODE_ENV === 'production') {
@@ -26,7 +25,11 @@ export const store = createStore(allReducers, enhancer);
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 // export type AppDispatch = typeof store.dispatch;
-export type AppDispatch = ThunkDispatch<RootState, void, AnyAction>;
+
+export type AppActions =
+  | AuthenticationActionTypes;
+
+export type AppDispatch = ThunkDispatch<RootState, void, AppActions>;
 
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

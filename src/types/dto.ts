@@ -1,6 +1,11 @@
 export interface CompanyRegistrationDTO {
-  Email: string;
-  CompanyCode: string;
-  CompanyNameVI: string;
-  CompanyNameEN: string;
+  email: string;
+  companyCode: string;
+  companyNameVI: string;
+  companyNameEN: string;
+};
+
+export interface LogInDTO {
+  email: string;
+  password: string;
 };

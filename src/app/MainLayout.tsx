@@ -14,7 +14,14 @@ const MainLayout = ({ children }: Props) => {
         </div>
         <div className="spacer" />
         <div className="header-end">
-          <Button style={{ marginRight: '8px' }}>Đăng nhập</Button>
+          <Button
+            variant="light"
+            style={{ marginRight: '8px' }}
+            component={Link}
+            to="/dang-nhap"
+          >
+            Đăng nhập
+          </Button>
           <Button>Đăng ký</Button>
         </div>
       </div>

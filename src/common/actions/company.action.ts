@@ -1,4 +1,3 @@
-import { Dispatch } from 'redux';
 import { AppDispatch } from '../../app/store';
 import { CompanyRegistrationDTO } from '../../types/dto';
 import companyServices from '../services/company.services';

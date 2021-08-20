@@ -1,19 +1,26 @@
 export interface Account {
-  Id: number;
-  Email: string;
-  IsVerified: boolean;
-  CreatedAt: Date;
-  UpdatedAt: Date;
+  id: number;
+  email: string;
+  isVerified: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+  roleId: number;
+};
+
+export interface Role {
+  id: number;
+  roleName: string;
+  description: string;
 };
 
 export interface Company {
-  Id: number;
-  CompanyCode: string;
-  CompanyNameVI: string;
-  CompanyNameEN: string;
-  AccountId: number;
-  CompanyTypeId: number;
-  IsVerified: boolean;
-  CreatedAt: Date;
-  UpdatedAt: Date;
+  id: number;
+  companyCode: string;
+  companyNameVI: string;
+  companyNameEN: string;
+  accountId: number;
+  companyTypeId: number;
+  isVerified: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 };

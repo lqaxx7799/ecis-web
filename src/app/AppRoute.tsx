@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Route, RouteProps } from 'react-router';
 
-import authServices from '../common/services/auth.services';
+import authenticationServices from '../common/services/authentication.services';
 import BlankLayout from './BlankLayout';
 
 type Props = {
@@ -16,7 +16,7 @@ const AppRoute = ({
   needAuth = false,
   ...rest
 }: Props) => {
-  const isLoggedIn = authServices.isLoggedIn();
+  const isLoggedIn = authenticationServices.isLoggedIn();
   return (
     <Route
       {...rest}
