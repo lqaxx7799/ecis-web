@@ -21,6 +21,22 @@ export interface Company {
   accountId: number;
   companyTypeId: number;
   isVerified: boolean;
+  isDeleted: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export interface VerificationProcess {
+  id: number;
+  reviewedAt?: Date;
+  validFrom?: Date;
+  validTo?: Date;
+  isOpenedByAgent: boolean;
+  submitMethod: string;
+  companyTypeId?: number;
+  assignedAgentId?: number;
+  companyId: number;
+  isDeleted: boolean;
   createdAt: Date;
   updatedAt: Date;
 };

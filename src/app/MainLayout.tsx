@@ -1,7 +1,8 @@
 import { Button, Container, Divider, Menu, MenuItem, MenuLabel, Text, Title } from '@mantine/core';
 import { PersonIcon, PinLeftIcon, TriangleDownIcon } from '@radix-ui/react-icons';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from './store';
+import authenticationActions from '../common/actions/authentication.actions';
+import { useAppDispatch, useAppSelector } from './store';
 
 type Props = {
   children?: React.ReactNode;
@@ -9,7 +10,12 @@ type Props = {
 };
 
 const MainLayout = ({ children, isBleedLayout }: Props) => {
+  const dispatch = useAppDispatch();
   const authentication = useAppSelector((state) => state.authentication);
+
+  const logOut = () => {
+    dispatch(authenticationActions.logOut());
+  };
 
   return (
     <>
@@ -34,7 +40,7 @@ const MainLayout = ({ children, isBleedLayout }: Props) => {
                 <MenuItem component={Link} to="/doanh-nghiep" icon={<PersonIcon />}>Quản lý tài khoản</MenuItem>
 
                 <Divider />
-                <MenuItem color="red" icon={<PinLeftIcon />}>Đăng xuất</MenuItem>                
+                <MenuItem color="red" icon={<PinLeftIcon />} onClick={logOut}>Đăng xuất</MenuItem>                
               </Menu>
             ) : (
               <>

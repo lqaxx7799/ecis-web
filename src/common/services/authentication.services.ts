@@ -3,9 +3,9 @@ import { LogInDTO } from "../../types/dto";
 import request from "../utils/request";
 import { store } from "../../app/store";
 
-function isLoggedIn(roles: number[] | undefined): boolean {
+function isLoggedIn(roles: string[] | undefined): boolean {
   const state = store.getState();
-  const { isInit, account } = state.authentication;
+  const { isInit, account, role } = state.authentication;
   if (!isInit) {
     return true;
   }
@@ -13,7 +13,7 @@ function isLoggedIn(roles: number[] | undefined): boolean {
     return false;
   }
   if (roles) {
-    return roles.includes(account.roleId);
+    return roles.includes(role?.roleName ?? '');
   }
   return true;
 }
@@ -34,12 +34,17 @@ function setToken(token: string) {
   Cookies.set('appToken', token);
 }
 
+function removeToken() {
+  Cookies.remove('appToken');
+}
+
 const authenticationServices = {
   authenticate,
   validate,
   isLoggedIn,
   getToken,
   setToken,
+  removeToken,
 };
 
 export default authenticationServices;

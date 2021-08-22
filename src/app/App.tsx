@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import authenticationActions from '../common/actions/authentication.actions';
 import CompanyDashboard from '../pages/Company/Dashboard';
 import CompanyLayout from './CompanyLayout';
+import CompanySelfVerification from '../pages/Company/SelfVerification';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -30,7 +31,9 @@ const App = () => {
         <AppRoute path='/dang-ky-thanh-cong' component={RegistrationSuccess} layout={MainLayout} />
         <AppRoute path='/dang-nhap' component={LogIn} layout={MainLayout} />
 
-        <AppRoute path="/doanh-nghiep" component={CompanyDashboard} layout={CompanyLayout} needAuth roles={[1]} />
+        <AppRoute path="/doanh-nghiep/tu-danh-gia" component={CompanySelfVerification} layout={CompanyLayout} needAuth roles={["Company"]} />
+        <AppRoute path="/doanh-nghiep" component={CompanyDashboard} layout={CompanyLayout} needAuth roles={["Company"]} />
+
 
         <AppRoute exact path='/' component={Home} layout={MainLayout} />
       </Switch>

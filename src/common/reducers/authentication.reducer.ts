@@ -1,48 +1,73 @@
-import { Account } from '../../types/models';
+import { Account, Company, Role } from '../../types/models';
 
 export const AUTHENTICATION_AUTHENTICATED = 'AUTHENTICATION_AUTHENTICATED';
 export const AUTHENTICATION_INIT = 'AUTHENTICATION_INIT';
+export const AUTHENTICATION_LOG_OUT = 'AUTHENTICATION_LOG_OUT';
 
 interface AuthenticationAuthenticated {
   type: typeof AUTHENTICATION_AUTHENTICATED;
-  payload: Account;
+  payload: {
+    account: Account;
+    role: Role;
+    company?: Company | null;
+  };
 };
 
 interface AuthenticationInit {
   type: typeof AUTHENTICATION_INIT;
-  payload: Account | null | undefined;
+  payload: {
+    account?: Account | null;
+    role?: Role | null;
+    company?: Company | null;
+  };
 };
+
+interface AuthenticationLogOut {
+  type: typeof AUTHENTICATION_LOG_OUT;
+}
 
 export type AuthenticationActionTypes = 
   | AuthenticationAuthenticated
-  | AuthenticationInit;
+  | AuthenticationInit
+  | AuthenticationLogOut;
 
 export type AuthenticationState = {
-  account: Account | null | undefined;
+  account?: Account | null;
+  company?: Company | null;
+  role?: Role | null;
   isInit: boolean;
 };
 
 const initialState: AuthenticationState = {
   account: null,
+  role: null,
+  company: null,
   isInit: false,
 };
 
-const authReducer = (state = initialState, action: AuthenticationActionTypes): AuthenticationState => {
+const authenticationReducer = (state = initialState, action: AuthenticationActionTypes): AuthenticationState => {
   switch (action.type) {
     case AUTHENTICATION_AUTHENTICATED:
       return {
         ...state,
-        account: action.payload,
+        ...action.payload,
       };
     case AUTHENTICATION_INIT:
       return {
         ...state,
-        account: action.payload,
+        ...action.payload,
         isInit: true,
+      };
+    case AUTHENTICATION_LOG_OUT:
+      return {
+        ...state,
+        account: null,
+        role: null,
+        company: null,
       };
     default:
       return state;
   }
 };
 
-export default authReducer;
+export default authenticationReducer;

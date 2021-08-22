@@ -8,7 +8,7 @@ type Props = {
   component: React.ComponentType<any>;
   layout: React.ComponentType<any>;
   needAuth?: boolean;
-  roles?: number[];
+  roles?: string[];
 } & RouteProps;
 
 const AppRoute = ({

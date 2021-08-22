@@ -1,6 +1,7 @@
 import { Button, Col, Grid, PasswordInput, TextInput, Title } from "@mantine/core";
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { useHistory } from "react-router";
 
 import { useAppDispatch } from "../../app/store";
 import authenticationActions from "../../common/actions/authentication.actions";
@@ -8,6 +9,7 @@ import { LogInDTO } from "../../types/dto";
 
 const LogIn = () => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const {
     control,
     formState: { errors },
@@ -20,6 +22,7 @@ const LogIn = () => {
     dispatch(authenticationActions.authenticate(data))
       .then((result) => {
         console.log(111111, result);
+        history.push('/');
       })
       .catch((err) => {
         console.log(1111112, err);
