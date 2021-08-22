@@ -1,9 +1,25 @@
 import Cookies from "js-cookie";
 import { LogInDTO } from "../../types/dto";
 import request from "../utils/request";
+import { store } from "../../app/store";
 
-function isLoggedIn(): boolean {
+function isLoggedIn(roles: number[] | undefined): boolean {
+  const state = store.getState();
+  const { isInit, account } = state.authentication;
+  if (!isInit) {
+    return true;
+  }
+  if (!account) {
+    return false;
+  }
+  if (roles) {
+    return roles.includes(account.roleId);
+  }
   return true;
+}
+
+function validate() {
+  return request.get('/Authentication/Validate');
 }
 
 function authenticate(payload: LogInDTO) {
@@ -20,6 +36,7 @@ function setToken(token: string) {
 
 const authenticationServices = {
   authenticate,
+  validate,
   isLoggedIn,
   getToken,
   setToken,

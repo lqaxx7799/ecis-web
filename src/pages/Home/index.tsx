@@ -1,4 +1,4 @@
-import { Col, Grid } from '@mantine/core';
+import { Col, Grid, Text } from '@mantine/core';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
@@ -7,9 +7,11 @@ const Home = () => {
       <Col span={8}>
       </Col>
       <Col span={4}>
-        <Link to="/dang-ky-doanh-nghiep">
-          Đăng ký doanh nghiệp
-        </Link> 
+        <Text>
+          <Link to="/dang-ky-doanh-nghiep">
+            Đăng ký doanh nghiệp
+          </Link> 
+        </Text>
       </Col>
     </Grid>
   );

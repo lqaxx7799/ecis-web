@@ -3,7 +3,7 @@ import { createLogger } from 'redux-logger';
 import { applyMiddleware, combineReducers, createStore, AnyAction } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import authReducer, { AuthenticationActionTypes } from '../common/reducers/authentication.reducer';
+import authenticationReducer, { AuthenticationActionTypes } from '../common/reducers/authentication.reducer';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 const getMiddleware = () => {
@@ -16,7 +16,7 @@ const getMiddleware = () => {
 const enhancer = composeWithDevTools(applyMiddleware(...getMiddleware()));
 
 const allReducers = combineReducers({
-  auth: authReducer,
+  authentication: authenticationReducer,
 });
 
 export const store = createStore(allReducers, enhancer);

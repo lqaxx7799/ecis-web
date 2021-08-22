@@ -8,15 +8,17 @@ type Props = {
   component: React.ComponentType<any>;
   layout: React.ComponentType<any>;
   needAuth?: boolean;
+  roles?: number[];
 } & RouteProps;
 
 const AppRoute = ({
   component: Component,
   layout: Layout = BlankLayout,
   needAuth = false,
+  roles,
   ...rest
 }: Props) => {
-  const isLoggedIn = authenticationServices.isLoggedIn();
+  const isLoggedIn = authenticationServices.isLoggedIn(roles);
   return (
     <Route
       {...rest}

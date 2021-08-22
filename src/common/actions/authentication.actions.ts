@@ -22,8 +22,28 @@ function authenticate(payload: LogInDTO): AppThunk<Promise<Account>> {
   }
 }
 
+function validate(): AppThunk<Promise<Account>> {
+  return async (dispatch: AppDispatch) => {
+    try {
+      const account = await authenticationServices.validate() as Account;
+      dispatch({
+        type: 'AUTHENTICATION_INIT',
+        payload: account,
+      });
+      return account;
+    } catch (e) {
+      dispatch({
+        type: 'AUTHENTICATION_INIT',
+        payload: null,
+      });
+      throw e;
+    }
+  } 
+}
+
 const authenticationActions = {
   authenticate,
+  validate,
 };
 
 export default authenticationActions;
