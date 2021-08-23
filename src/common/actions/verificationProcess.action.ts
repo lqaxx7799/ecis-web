@@ -25,8 +25,30 @@ function getAllByCompany(companyId: number): AppThunk<Promise<VerificationProces
   }
 }
 
+function getById(id: number): AppThunk<Promise<VerificationProcess | null>> {
+  return async (dispatch: AppDispatch) => {
+    dispatch<VerificationProcessActionTypes>({
+      type: 'VERIFICATION_PROCESS_LOADING',
+    });
+    try {
+      const result = await verificationProcessServices.getById(id);
+      dispatch<VerificationProcessActionTypes>({
+        type: 'VERIFICATION_PROCESS_EDITING_LOADED',
+        payload: result,
+      });
+      return result;
+    } catch (e) {
+      dispatch<VerificationProcessActionTypes>({
+        type: 'VERIFICATION_PROCESS_LOAD_FAILED',
+      });
+      return null;
+    }
+  }
+}
+
 const verificationProcessActions = {
   getAllByCompany,
+  getById,
 };
 
 export default verificationProcessActions;

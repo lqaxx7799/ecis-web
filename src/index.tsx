@@ -8,12 +8,14 @@ import { store } from './app/store';
 import App from './app/App';
 
 import './styles/index.scss';
-import { MantineProvider } from '@mantine/core';
+import { GlobalStyles, MantineProvider, NormalizeCSS } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 
 ReactDOM.render(
   <MantineProvider>
     <NotificationsProvider>
+      <NormalizeCSS />
+      <GlobalStyles />
       <Provider store={store}>
         <Router>
           <Switch>

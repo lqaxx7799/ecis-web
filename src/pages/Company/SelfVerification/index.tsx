@@ -1,12 +1,13 @@
 import { Button, Container, Group, LoadingOverlay, Text, Title, Tooltip } from "@mantine/core";
+import _ from 'lodash';
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
 import DataTable, { IDataTableColumn } from 'react-data-table-component';
 import { VerificationProcess } from "../../../types/models";
-import { Pencil2Icon } from "@radix-ui/react-icons";
+import { EyeOpenIcon, Pencil2Icon } from "@radix-ui/react-icons";
 import { useEffect } from "react";
 import verificationProcessActions from "../../../common/actions/verificationProcess.action";
-
+import dayjs from "dayjs";
 
 type Props = {
 
@@ -18,7 +19,7 @@ const CompanySelfVerification = (props: Props) => {
   const { company } = useAppSelector((state) => state.authentication);
 
   useEffect(() => {
-    dispatch(verificationProcessActions.getAllByCompany(company?.accountId ?? 0));
+    dispatch(verificationProcessActions.getAllByCompany(company?.id ?? 0));
   }, []);
 
   const columns: IDataTableColumn<VerificationProcess>[] = [
@@ -27,8 +28,9 @@ const CompanySelfVerification = (props: Props) => {
       selector: (row, index) => index + 1,
     },
     {
-      name: 'Thời gian',
+      name: 'Thời gian tạo',
       selector: 'createdAt',
+      format: (row) => dayjs(row.createdAt).format('DD/MM/YYYY'),
     },
     {
       name: 'Trạng thái',
@@ -36,10 +38,10 @@ const CompanySelfVerification = (props: Props) => {
     },
     {
       name: 'Hành động',
-      format: (row, index) => (
+      cell: (row, index) => (
         <Group>
           <Tooltip label="Xem chi tiết">
-            <Button><Pencil2Icon /></Button>
+            <Button><EyeOpenIcon /></Button>
           </Tooltip>
           <Tooltip label="Cập nhật">
             <Button><Pencil2Icon /></Button>
@@ -49,23 +51,32 @@ const CompanySelfVerification = (props: Props) => {
     },
   ];
 
+  const pendingProcess = _.find(records, item => !item.isSubmitted);
+
   return (
     <div>
       <Title order={1}>Tự đánh giá</Title>
-
-      <div style={{ marginTop: '24px' }}>
-        <Text>
-          Bạn đang có quá trình tự đánh giá cần phải thực hiện. Vui lòng cập nhật thông tin và
-          gửi cho bộ kiểm lâm đánh giá.
-        </Text>
-        <Button
-          style={{ marginTop: '12px' }}
-          component={Link}
-          to="/doanh-nghiep/tu-danh-gia/123"
-        >
-          Cập nhật
-        </Button>
-      </div>
+      
+      {
+        pendingProcess && (
+          <div style={{ marginTop: '24px' }}>
+            <Text>
+              Bạn đang có quá trình tự đánh giá cần phải thực hiện. Vui lòng cập nhật thông tin và
+              gửi cho bộ kiểm lâm đánh giá.
+            </Text>
+            <Text style={{ fontWeight: 600 }}>
+              Bạn cần hoàn thành trước {dayjs(pendingProcess.submitDeadline).format('DD/MM/YYYY HH:mm')}.
+            </Text>
+            <Button
+              style={{ marginTop: '12px' }}
+              component={Link}
+              to={`/doanh-nghiep/tu-danh-gia/${pendingProcess.id}`}
+            >
+              Cập nhật
+            </Button>
+          </div>
+        )
+      }
 
       <div style={{ marginTop: '24px' }}>
         <LoadingOverlay visible={loading} />
