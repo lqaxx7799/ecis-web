@@ -6,6 +6,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import authenticationReducer, { AuthenticationActionTypes } from '../common/reducers/authentication.reducer';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import verificationProcessReducer, { VerificationProcessActionTypes } from '../common/reducers/verificationProcess.reducer';
+import criteriaTypeReducer, { CriteriaTypeActionTypes } from '../common/reducers/criteriaType.reducer';
+import criteriaReducer, { CriteriaActionTypes } from '../common/reducers/criteria.reducer';
 
 const getMiddleware = () => {
   if (process.env.NODE_ENV === 'production') {
@@ -18,6 +20,8 @@ const enhancer = composeWithDevTools(applyMiddleware(...getMiddleware()));
 
 const allReducers = combineReducers({
   authentication: authenticationReducer,
+  criteriaType: criteriaTypeReducer,
+  criteria: criteriaReducer,
   verificationProcess: verificationProcessReducer,
 });
 
@@ -30,6 +34,8 @@ export type RootState = ReturnType<typeof store.getState>;
 
 export type AppActions =
   | AuthenticationActionTypes
+  | CriteriaTypeActionTypes
+  | CriteriaActionTypes
   | VerificationProcessActionTypes;
 
 export type AppDispatch = ThunkDispatch<RootState, void, AppActions>;

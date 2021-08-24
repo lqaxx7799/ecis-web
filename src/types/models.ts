@@ -19,6 +19,19 @@ export interface Role {
   description: string;
 };
 
+export interface CriteriaType extends BaseModel {
+  id: number;
+  criteriaTypeName: string;
+  description: string;
+};
+
+export interface Criteria extends BaseModel {
+  id: number;
+  criteriaName: string;
+  description: string;
+  criteriaTypeId: number;
+};
+
 export interface Company extends BaseModel {
   id: number;
   companyCode: string;

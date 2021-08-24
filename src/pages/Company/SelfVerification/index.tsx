@@ -8,6 +8,7 @@ import { EyeOpenIcon, Pencil2Icon } from "@radix-ui/react-icons";
 import { useEffect } from "react";
 import verificationProcessActions from "../../../common/actions/verificationProcess.action";
 import dayjs from "dayjs";
+import './selfVerification.scss';
 
 type Props = {
 

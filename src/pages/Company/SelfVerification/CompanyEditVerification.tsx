@@ -1,9 +1,11 @@
 import { Button, LoadingOverlay, Title } from "@mantine/core";
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
+import _ from "lodash";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
 import verificationProcessActions from "../../../common/actions/verificationProcess.action";
+import VerificationCriteriaForm from "./VerificationCriteriaForm";
 
 type Props = {
 
@@ -15,15 +17,23 @@ type RouteParams = {
 
 const CompanyEditVerification = (props: Props) => {
   const dispatch = useAppDispatch();
-  const { loading, editingProcess } = useAppSelector((state) => state.verificationProcess);
+  const { loading, editingProcess, editingCriterias } = useAppSelector((state) => state.verificationProcess);
+  const { criterias } = useAppSelector((state) => state.criteria);
+  const { criteriaTypes } = useAppSelector((state) => state.criteriaType);
+
   let { id } = useParams<RouteParams>();
 
   useEffect(() => {
-    dispatch(verificationProcessActions.getById(parseInt(id)));
+    dispatch(verificationProcessActions.loadEditingProcess(parseInt(id)));
   }, []);
 
+  const groupedCriteria = _.groupBy(editingCriterias, editingCriteria => {
+    const found = _.find(criterias, criteria => criteria.id === editingCriteria.criteriaId);
+    return found?.criteriaTypeId;
+  });
+
   return (
-    <div>
+    <div className="company-verification-form">
       <LoadingOverlay visible={loading} />
       <Title order={1}>Cập nhật tự đánh giá</Title>
       <Button
@@ -34,6 +44,26 @@ const CompanyEditVerification = (props: Props) => {
       >
         Quay lại
       </Button>
+      
+      <div style={{ marginTop: '24px' }}>
+        {
+          Object.keys(groupedCriteria).map((criteriaTypeId) => {
+            const criteriaType = _.find(criteriaTypes, type => type.id === parseInt(criteriaTypeId));
+
+            const criteriaList = groupedCriteria[criteriaTypeId];
+            return (
+              <div key={criteriaTypeId}>
+                <Title order={3}>{criteriaType?.criteriaTypeName ?? ''}</Title>
+                <VerificationCriteriaForm
+                  verificationCriterias={criteriaList}
+                />
+              </div>
+            )
+          })
+        }
+
+        <Button>Cập nhật</Button>
+      </div>
     </div>
   );
 }
