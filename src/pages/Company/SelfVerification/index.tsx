@@ -71,9 +71,9 @@ const CompanySelfVerification = (props: Props) => {
             <Button
               style={{ marginTop: '12px' }}
               component={Link}
-              to={`/doanh-nghiep/tu-danh-gia/${pendingProcess.id}`}
+              to={`/doanh-nghiep/tu-danh-gia/chi-tiet/${pendingProcess.id}`}
             >
-              Cập nhật
+              Xem chi tiết
             </Button>
           </div>
         )

@@ -12,6 +12,7 @@ import CompanyDashboard from '../pages/Company/Dashboard';
 import CompanyLayout from './CompanyLayout';
 import CompanySelfVerification from '../pages/Company/SelfVerification';
 import CompanyEditVerification from '../pages/Company/SelfVerification/CompanyEditVerification';
+import CompanyDetailVerification from '../pages/Company/SelfVerification/CompanyDetailVerification';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -31,11 +32,11 @@ const App = () => {
         <AppRoute path='/dang-ky-doanh-nghiep' component={CompanyRegistration} layout={MainLayout} />
         <AppRoute path='/dang-ky-thanh-cong' component={RegistrationSuccess} layout={MainLayout} />
         <AppRoute path='/dang-nhap' component={LogIn} layout={MainLayout} />
-
-        <AppRoute path="/doanh-nghiep/tu-danh-gia/:id" component={CompanyEditVerification} layout={CompanyLayout} needAuth roles={["Company"]} />
+        
+        <AppRoute path="/doanh-nghiep/tu-danh-gia/chi-tiet/:id" component={CompanyDetailVerification} layout={CompanyLayout} needAuth roles={["Company"]} />
+        <AppRoute path="/doanh-nghiep/tu-danh-gia/sua/:id" component={CompanyEditVerification} layout={CompanyLayout} needAuth roles={["Company"]} />
         <AppRoute path="/doanh-nghiep/tu-danh-gia" component={CompanySelfVerification} layout={CompanyLayout} needAuth roles={["Company"]} />
         <AppRoute path="/doanh-nghiep" component={CompanyDashboard} layout={CompanyLayout} needAuth roles={["Company"]} />
-
 
         <AppRoute exact path='/' component={Home} layout={MainLayout} />
       </Switch>

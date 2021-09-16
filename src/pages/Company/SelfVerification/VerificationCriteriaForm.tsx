@@ -2,6 +2,7 @@ import { Button, Paper, Text, Title } from "@mantine/core";
 import { PlusIcon } from "@radix-ui/react-icons";
 import _ from "lodash";
 import { useAppSelector } from "../../../app/store";
+import FileUpload from "../../../common/components/FileUpload";
 import { VerificationCriteria } from "../../../types/models";
 
 type Props = {
@@ -12,6 +13,10 @@ const VerificationCriteriaForm = (props: Props) => {
   const { verificationCriterias } = props;
 
   const { criterias } = useAppSelector((state) => state.criteria);
+
+  const onUpdateFiles = (files: File[]) => {
+    console.log(111111, files);
+  };
 
   return (
     <div className="criteria-group">
@@ -25,7 +30,11 @@ const VerificationCriteriaForm = (props: Props) => {
           >
             <Title order={5}>{criteria?.criteriaName ?? ''}</Title>
             <div className="criteria-upload-wrapper">
-              <Button leftIcon={<PlusIcon />}>Thêm tài liệu</Button>
+              
+              <FileUpload
+                uploadText="Thêm tài liệu"
+                onUpdateFiles={onUpdateFiles}
+              />
             </div>
           </div>
         )
