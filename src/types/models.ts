@@ -63,3 +63,14 @@ export interface VerificationCriteria extends BaseModel {
   verificationProcessId?: number;
   criteriaId?: number;
 };
+
+export interface VerificationDocument extends BaseModel {
+  id: number;
+  content: string;
+  documentName: string;
+  resourceType: string;
+  resourceSize: number;
+  resourceUrl: string;
+  uploaderType: string;
+  verificationCriteriaId: number;
+};

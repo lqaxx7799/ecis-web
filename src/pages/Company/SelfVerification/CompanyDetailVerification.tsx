@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
 import verificationProcessActions from "../../../common/actions/verificationProcess.action";
+import UploadedFileItem from "./UploadedFileItem";
 
 type Props = {
 
@@ -17,7 +18,12 @@ type RouteParams = {
 
 const CompanyDetailVerification = (props: Props) => {
   const dispatch = useAppDispatch();
-  const { loading, editingProcess, editingCriterias } = useAppSelector((state) => state.verificationProcess);
+  const {
+    loading,
+    editingProcess,
+    editingCriterias,
+    editingDocuments,
+  } = useAppSelector((state) => state.verificationProcess);
   const { criterias } = useAppSelector((state) => state.criteria);
   const { criteriaTypes } = useAppSelector((state) => state.criteriaType);
 
@@ -40,7 +46,7 @@ const CompanyDetailVerification = (props: Props) => {
   });
 
   return (
-    <div>
+    <div className="company-verification-form">
       <LoadingOverlay visible={loading} />
       <Title order={1}>Chi tiết tự đánh giá</Title>
       <Button
@@ -69,6 +75,52 @@ const CompanyDetailVerification = (props: Props) => {
             Gửi đánh giá
           </Button>
         </div>
+      </div>
+
+      <div style={{ marginTop: '24px' }}>
+        {
+          Object.keys(groupedCriteria).map((criteriaTypeId) => {
+            const criteriaType = _.find(criteriaTypes, type => type.id === parseInt(criteriaTypeId));
+
+            const criteriaList = groupedCriteria[criteriaTypeId];
+            return (
+              <div key={criteriaTypeId}>
+                <Title order={3}>{criteriaType?.criteriaTypeName ?? ''}</Title>
+                {/* <VerificationCriteriaForm
+                  verificationCriterias={criteriaList}
+                /> */}
+                <div className="criteria-group">
+                  {_.map(criteriaList, (item, index) => {
+                    const criteria = _.find(
+                      criterias,
+                      (criteria) => criteria.id === item.criteriaId
+                    );
+                    const documents = _.filter(
+                      editingDocuments,
+                      (document) => document.verificationCriteriaId === criteria?.id
+                    );
+                    return (
+                      <div
+                        className="criteria-item"
+                        key={index}
+                      >
+                        <Title order={5}>{criteria?.criteriaName ?? ''}</Title>
+                        <div style={{ marginTop: '12px' }}>
+                          {
+                            _.isEmpty(documents) ? 'Trống' :
+                              _.map(documents, (document) => (
+                                <UploadedFileItem document={document} />
+                              ))
+                          }
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            );
+          })
+        }
       </div>
 
       <Modal

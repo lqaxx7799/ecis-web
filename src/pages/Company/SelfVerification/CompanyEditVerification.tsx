@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
 import verificationProcessActions from "../../../common/actions/verificationProcess.action";
-import VerificationCriteriaForm from "./VerificationCriteriaForm";
+import CompanyEditVerificationCriteria from "./CompanyEditVerificationCriteria";
 
 type Props = {
 
@@ -54,11 +54,11 @@ const CompanyEditVerification = (props: Props) => {
             return (
               <div key={criteriaTypeId}>
                 <Title order={3}>{criteriaType?.criteriaTypeName ?? ''}</Title>
-                <VerificationCriteriaForm
+                <CompanyEditVerificationCriteria
                   verificationCriterias={criteriaList}
                 />
               </div>
-            )
+            );
           })
         }
 

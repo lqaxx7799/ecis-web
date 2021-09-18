@@ -1,4 +1,4 @@
-import { VerificationCriteria, VerificationProcess } from '../../types/models';
+import { VerificationCriteria, VerificationDocument, VerificationProcess } from '../../types/models';
 
 export const VERIFICATION_PROCESS_LOADING = 'VERIFICATION_PROCESS_LOADING';
 export const VERIFICATION_PROCESS_LOADED = 'VERIFICATION_PROCESS_LOADED';
@@ -23,6 +23,7 @@ interface VerificationProcessEditingLoaded {
   payload: {
     editingProcess: VerificationProcess,
     editingCriterias: VerificationCriteria[],
+    editingDocuments: VerificationDocument[],
   },
 };
 
@@ -37,6 +38,7 @@ export type VerificationProcessState = {
   loading: boolean;
   editingProcess?: VerificationProcess | null;
   editingCriterias: VerificationCriteria[];
+  editingDocuments: VerificationDocument[];
 };
 
 const initialState: VerificationProcessState = {
@@ -44,6 +46,7 @@ const initialState: VerificationProcessState = {
   loading: false,
   editingProcess: null,
   editingCriterias: [],
+  editingDocuments: [],
 };
 
 const verificationProcessReducer = (state = initialState, action: VerificationProcessActionTypes): VerificationProcessState => {
@@ -70,6 +73,7 @@ const verificationProcessReducer = (state = initialState, action: VerificationPr
         loading: false,
         editingProcess: action.payload?.editingProcess,
         editingCriterias: action.payload?.editingCriterias,
+        editingDocuments: action.payload?.editingDocuments,
       };
     default:
       return state;
