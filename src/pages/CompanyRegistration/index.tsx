@@ -1,10 +1,12 @@
 import { Button, Col, Grid, Text, TextInput, Title } from '@mantine/core';
 import { useForm } from '@mantine/hooks';
 import { useNotifications } from '@mantine/notifications';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import ReCAPTCHA from "react-google-recaptcha";
 import { useHistory } from 'react-router';
 import { useAppDispatch } from '../../app/store';
 import companyActions from '../../common/actions/company.action';
+import config from '../../config';
 import { CompanyRegistrationDTO } from '../../types/dto';
 
 type Props = {
@@ -37,6 +39,8 @@ const CompanyRegistration = (props: Props) => {
     },
   });
 
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+
   const updateEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     form.setFieldValue('email', value);
@@ -62,6 +66,11 @@ const CompanyRegistration = (props: Props) => {
   };
 
   const handleSubmit = (values: CompanyRegistrationDTO) => {
+    const recaptchaValue = recaptchaRef?.current?.getValue();
+    if (!recaptchaValue) {
+      return;
+    }
+ 
     const isValid = Object.keys(validation).reduce((result: boolean, key: string) => {
       return result && !validation[key as keyof CompanyRegistrationDTO];
     }, true);
@@ -139,6 +148,15 @@ const CompanyRegistration = (props: Props) => {
               placeholder="Vui lòng nhập tên doanh nghiệp (Tiếng Anh)"
               style={{ marginBottom: '12px' }}
             />
+
+            <div
+              style={{ marginBottom: '12px' }}
+            >
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey={config.GOOGLE_RECAPTCHA_KEY}
+              />
+            </div>
             
             <Button type="submit">
               Đăng ký

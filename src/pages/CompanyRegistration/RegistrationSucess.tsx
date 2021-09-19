@@ -10,7 +10,7 @@ const RegistrationSuccess = () => {
         với email mà bạn đã sử dụng để đăng ký.
       </Text>
       <Text>
-        Nếu sau 01 ngày không nhận được mail, bạn có thể gọi điện vào số tổng đài sau
+        Nếu sau 02 ngày không nhận được mail, bạn có thể gọi điện vào số tổng đài sau
         để có thêm thông tin chi tiết: +849 7617 6490
       </Text>
     </div>
