@@ -1,6 +1,6 @@
 import _ from "lodash";
-import { useAppSelector } from "../../../app/store";
-import { VerificationCriteria } from "../../../types/models";
+import { useAppSelector } from "../../../../app/store";
+import { VerificationCriteria } from "../../../../types/models";
 import VerificationCriteriaForm from "./VerificationCriteriaForm";
 
 type Props = {
@@ -10,10 +10,6 @@ type Props = {
 const CompanyEditVerificationCriteria = (props: Props) => {
   const { verificationCriterias } = props;
   const { criterias } = useAppSelector((state) => state.criteria);
-
-  const onUpdateFiles = (files: File[]) => {
-    console.log(111111, files);
-  };
 
   return (
     <div className="criteria-group">

@@ -3,10 +3,10 @@ import { ExternalLinkIcon } from '@radix-ui/react-icons';
 import dayjs from 'dayjs';
 import { useState } from 'react';
 import { FileIcon, defaultStyles, DefaultExtensionType } from 'react-file-icon';
-import { DEFAULT_DATETIME_FORMAT } from '../../../common/constants/app';
-import helpers from '../../../common/utils/helpers';
-import config from '../../../config';
-import { VerificationDocument } from '../../../types/models';
+import { DEFAULT_DATETIME_FORMAT } from '../../../../common/constants/app';
+import helpers from '../../../../common/utils/helpers';
+import config from '../../../../config';
+import { VerificationDocument } from '../../../../types/models';
 
 type Props = {
   document: VerificationDocument;
@@ -53,7 +53,7 @@ const UploadedFileItem = ({ document }: Props) => {
             <Text
               variant="link"
               component="a"
-              href={`${config.BASE_API}/${document.resourceUrl}`}
+              href={`${config.BASE_API}${document.resourceUrl}`}
               rel="noreffer noopener"
               target="_blank"
             >

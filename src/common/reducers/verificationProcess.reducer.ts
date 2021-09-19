@@ -3,7 +3,6 @@ import { VerificationCriteria, VerificationDocument, VerificationProcess } from 
 export const VERIFICATION_PROCESS_LOADING = 'VERIFICATION_PROCESS_LOADING';
 export const VERIFICATION_PROCESS_LOADED = 'VERIFICATION_PROCESS_LOADED';
 export const VERIFICATION_PROCESS_LOAD_FAILED = 'VERIFICATION_PROCESS_LOAD_FAILED';
-export const VERIFICATION_PROCESS_EDITING_LOADED = 'VERIFICATION_PROCESS_EDITING_LOADED';
 
 interface VerificationProcessLoading {
   type: typeof VERIFICATION_PROCESS_LOADING;
@@ -18,35 +17,19 @@ interface VerificationProcessLoadFailed {
   type: typeof VERIFICATION_PROCESS_LOAD_FAILED;
 };
 
-interface VerificationProcessEditingLoaded {
-  type: typeof VERIFICATION_PROCESS_EDITING_LOADED;
-  payload: {
-    editingProcess: VerificationProcess,
-    editingCriterias: VerificationCriteria[],
-    editingDocuments: VerificationDocument[],
-  },
-};
-
 export type VerificationProcessActionTypes = 
   | VerificationProcessLoading
   | VerificationProcessLoaded
-  | VerificationProcessLoadFailed
-  | VerificationProcessEditingLoaded;
+  | VerificationProcessLoadFailed;
 
 export type VerificationProcessState = {
   records: VerificationProcess[];
   loading: boolean;
-  editingProcess?: VerificationProcess | null;
-  editingCriterias: VerificationCriteria[];
-  editingDocuments: VerificationDocument[];
 };
 
 const initialState: VerificationProcessState = {
   records: [],
   loading: false,
-  editingProcess: null,
-  editingCriterias: [],
-  editingDocuments: [],
 };
 
 const verificationProcessReducer = (state = initialState, action: VerificationProcessActionTypes): VerificationProcessState => {
@@ -66,14 +49,6 @@ const verificationProcessReducer = (state = initialState, action: VerificationPr
       return {
         ...state,
         loading: false,
-      };
-    case VERIFICATION_PROCESS_EDITING_LOADED:
-      return {
-        ...state,
-        loading: false,
-        editingProcess: action.payload?.editingProcess,
-        editingCriterias: action.payload?.editingCriterias,
-        editingDocuments: action.payload?.editingDocuments,
       };
     default:
       return state;

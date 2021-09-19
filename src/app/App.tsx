@@ -10,9 +10,9 @@ import { useEffect } from 'react';
 import authenticationActions from '../common/actions/authentication.actions';
 import CompanyDashboard from '../pages/Company/Dashboard';
 import CompanyLayout from './CompanyLayout';
-import CompanySelfVerification from '../pages/Company/SelfVerification';
-import CompanyEditVerification from '../pages/Company/SelfVerification/CompanyEditVerification';
-import CompanyDetailVerification from '../pages/Company/SelfVerification/CompanyDetailVerification';
+import CompanySelfVerification from '../pages/Company/SelfVerification/components';
+import CompanyEditVerification from '../pages/Company/SelfVerification/components/CompanyEditVerification';
+import CompanyDetailVerification from '../pages/Company/SelfVerification/components/CompanyDetailVerification';
 
 const App = () => {
   const dispatch = useAppDispatch();

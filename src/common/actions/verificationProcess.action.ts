@@ -1,11 +1,7 @@
 import { AppDispatch } from '../../app/store';
 import { VerificationProcess } from '../../types/models';
 import { VerificationProcessActionTypes } from '../reducers/verificationProcess.reducer';
-import verificationCriteriaServices from '../services/verificationCriteria.services';
-import verificationDocumentServices from '../services/verificationDocument.services';
 import verificationProcessServices from '../services/verificationProcess.services';
-import criteriaActions from './criteria.action';
-import criteriaTypeActions from './criteriaType.action';
 import { AppThunk } from './type';
 
 function getAllByCompany(companyId: number): AppThunk<Promise<VerificationProcess[]>> {
@@ -29,40 +25,8 @@ function getAllByCompany(companyId: number): AppThunk<Promise<VerificationProces
   }
 }
 
-function loadEditingProcess(id: number): AppThunk<Promise<VerificationProcess | null>> {
-  return async (dispatch: AppDispatch) => {
-    dispatch<VerificationProcessActionTypes>({
-      type: 'VERIFICATION_PROCESS_LOADING',
-    });
-    try {
-      const [process, criterias, documents] = await Promise.all([
-        verificationProcessServices.getById(id),
-        verificationCriteriaServices.getAllByProcessId(id),
-        verificationDocumentServices.getAllByProcessId(id),
-        dispatch(criteriaActions.getAll()),
-        dispatch(criteriaTypeActions.getAll()),
-      ]);
-      dispatch<VerificationProcessActionTypes>({
-        type: 'VERIFICATION_PROCESS_EDITING_LOADED',
-        payload: {
-          editingProcess: process,
-          editingCriterias: criterias,
-          editingDocuments: documents,
-        },
-      });
-      return process;
-    } catch (e) {
-      dispatch<VerificationProcessActionTypes>({
-        type: 'VERIFICATION_PROCESS_LOAD_FAILED',
-      });
-      return null;
-    }
-  }
-}
-
 const verificationProcessActions = {
   getAllByCompany,
-  loadEditingProcess,
 };
 
 export default verificationProcessActions;

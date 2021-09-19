@@ -4,8 +4,8 @@ import dayjs from "dayjs";
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../app/store";
-import verificationProcessActions from "../../../common/actions/verificationProcess.action";
+import { useAppDispatch, useAppSelector } from "../../../../app/store";
+import companySelfVerificationActions from "../action";
 import UploadedFileItem from "./UploadedFileItem";
 
 type Props = {
@@ -21,9 +21,9 @@ const CompanyDetailVerification = (props: Props) => {
   const {
     loading,
     editingProcess,
-    editingCriterias,
-    editingDocuments,
-  } = useAppSelector((state) => state.verificationProcess);
+    verificationCriterias,
+    verificationDocuments,
+  } = useAppSelector((state) => state.companySelfVerification);
   const { criterias } = useAppSelector((state) => state.criteria);
   const { criteriaTypes } = useAppSelector((state) => state.criteriaType);
 
@@ -32,7 +32,7 @@ const CompanyDetailVerification = (props: Props) => {
   let { id } = useParams<RouteParams>();
 
   useEffect(() => {
-    dispatch(verificationProcessActions.loadEditingProcess(parseInt(id)));
+    dispatch(companySelfVerificationActions.loadSelfVerification(parseInt(id)));
   }, []);
 
   const submitVerification = () => {
@@ -40,7 +40,7 @@ const CompanyDetailVerification = (props: Props) => {
     setShowSubmitDialog(false);
   }
 
-  const groupedCriteria = _.groupBy(editingCriterias, editingCriteria => {
+  const groupedCriteria = _.groupBy(verificationCriterias, editingCriteria => {
     const found = _.find(criterias, criteria => criteria.id === editingCriteria.criteriaId);
     return found?.criteriaTypeId;
   });
@@ -96,7 +96,7 @@ const CompanyDetailVerification = (props: Props) => {
                       (criteria) => criteria.id === item.criteriaId
                     );
                     const documents = _.filter(
-                      editingDocuments,
+                      verificationDocuments,
                       (document) => document.verificationCriteriaId === criteria?.id
                     );
                     return (

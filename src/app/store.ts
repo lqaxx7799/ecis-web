@@ -8,6 +8,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import verificationProcessReducer, { VerificationProcessActionTypes } from '../common/reducers/verificationProcess.reducer';
 import criteriaTypeReducer, { CriteriaTypeActionTypes } from '../common/reducers/criteriaType.reducer';
 import criteriaReducer, { CriteriaActionTypes } from '../common/reducers/criteria.reducer';
+import companySelfVerificationReducer, { CompanySelfVerificationActionTypes } from '../pages/Company/SelfVerification/reducer';
 
 const getMiddleware = () => {
   if (process.env.NODE_ENV === 'production') {
@@ -20,6 +21,7 @@ const enhancer = composeWithDevTools(applyMiddleware(...getMiddleware()));
 
 const allReducers = combineReducers({
   authentication: authenticationReducer,
+  companySelfVerification: companySelfVerificationReducer,
   criteriaType: criteriaTypeReducer,
   criteria: criteriaReducer,
   verificationProcess: verificationProcessReducer,
@@ -34,6 +36,7 @@ export type RootState = ReturnType<typeof store.getState>;
 
 export type AppActions =
   | AuthenticationActionTypes
+  | CompanySelfVerificationActionTypes
   | CriteriaTypeActionTypes
   | CriteriaActionTypes
   | VerificationProcessActionTypes;

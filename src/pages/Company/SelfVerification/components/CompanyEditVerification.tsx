@@ -3,9 +3,10 @@ import { ChevronLeftIcon } from "@radix-ui/react-icons";
 import _ from "lodash";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../app/store";
-import verificationProcessActions from "../../../common/actions/verificationProcess.action";
+import { useAppDispatch, useAppSelector } from "../../../../app/store";
+import companySelfVerificationActions from "../action";
 import CompanyEditVerificationCriteria from "./CompanyEditVerificationCriteria";
+import EditDocumentModal from "./EditDocumentModal";
 
 type Props = {
 
@@ -17,17 +18,17 @@ type RouteParams = {
 
 const CompanyEditVerification = (props: Props) => {
   const dispatch = useAppDispatch();
-  const { loading, editingProcess, editingCriterias } = useAppSelector((state) => state.verificationProcess);
+  const { loading, verificationCriterias } = useAppSelector((state) => state.companySelfVerification);
   const { criterias } = useAppSelector((state) => state.criteria);
   const { criteriaTypes } = useAppSelector((state) => state.criteriaType);
 
   let { id } = useParams<RouteParams>();
 
   useEffect(() => {
-    dispatch(verificationProcessActions.loadEditingProcess(parseInt(id)));
+    dispatch(companySelfVerificationActions.loadSelfVerification(parseInt(id)));
   }, []);
 
-  const groupedCriteria = _.groupBy(editingCriterias, editingCriteria => {
+  const groupedCriteria = _.groupBy(verificationCriterias, editingCriteria => {
     const found = _.find(criterias, criteria => criteria.id === editingCriteria.criteriaId);
     return found?.criteriaTypeId;
   });
@@ -40,7 +41,7 @@ const CompanyEditVerification = (props: Props) => {
         style={{ marginTop: '12px' }}
         component={Link}
         leftIcon={<ChevronLeftIcon />}
-        to={`/doanh-nghiep/tu-danh-gia`}
+        to={`/doanh-nghiep/tu-danh-gia/chi-tiet/${id}`}
       >
         Quay lại
       </Button>
@@ -62,8 +63,8 @@ const CompanyEditVerification = (props: Props) => {
           })
         }
 
-        <Button>Cập nhật</Button>
       </div>
+      <EditDocumentModal />
     </div>
   );
 }

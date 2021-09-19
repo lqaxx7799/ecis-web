@@ -1,14 +1,14 @@
 import { Button, Container, Group, LoadingOverlay, Text, Title, Tooltip } from "@mantine/core";
 import _ from 'lodash';
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../app/store";
+import { useAppDispatch, useAppSelector } from "../../../../app/store";
 import DataTable, { IDataTableColumn } from 'react-data-table-component';
-import { VerificationProcess } from "../../../types/models";
+import { VerificationProcess } from "../../../../types/models";
 import { EyeOpenIcon, Pencil2Icon } from "@radix-ui/react-icons";
 import { useEffect } from "react";
-import verificationProcessActions from "../../../common/actions/verificationProcess.action";
+import verificationProcessActions from "../../../../common/actions/verificationProcess.action";
 import dayjs from "dayjs";
-import './selfVerification.scss';
+import '../selfVerification.scss';
 
 type Props = {
 
