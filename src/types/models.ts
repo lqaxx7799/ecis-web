@@ -74,3 +74,14 @@ export interface VerificationDocument extends BaseModel {
   uploaderType: string;
   verificationCriteriaId: number;
 };
+
+export interface Agent extends BaseModel {
+  id: number;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  dateOfBirth: Date;
+  gender: string;
+  address: string;
+  accountId: number;
+};
