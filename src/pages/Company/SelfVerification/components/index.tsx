@@ -1,14 +1,16 @@
-import { Button, Container, Group, LoadingOverlay, Text, Title, Tooltip } from "@mantine/core";
+import { Alert, Button, Container, Group, LoadingOverlay, Text, Title, Tooltip } from "@mantine/core";
 import _ from 'lodash';
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../app/store";
 import DataTable, { IDataTableColumn } from 'react-data-table-component';
 import { VerificationProcess } from "../../../../types/models";
-import { EyeOpenIcon, Pencil2Icon } from "@radix-ui/react-icons";
+import { BellIcon, EyeOpenIcon, Pencil2Icon } from "@radix-ui/react-icons";
 import { useEffect } from "react";
 import verificationProcessActions from "../../../../common/actions/verificationProcess.action";
 import dayjs from "dayjs";
 import '../selfVerification.scss';
+import verificationConfirmRequirementActions from "../../../../common/actions/verificationConfirmRequirement.action";
+import { DEFAULT_DATETIME_FORMAT } from "../../../../common/constants/app";
 
 type Props = {
 
@@ -18,9 +20,11 @@ const CompanySelfVerification = (props: Props) => {
   const dispatch = useAppDispatch();
   const { loading, records } = useAppSelector((state) => state.verificationProcess);
   const { company } = useAppSelector((state) => state.authentication);
+  const { verificationConfirmRequirements } = useAppSelector((state) => state.verificationConfirmRequirement);
 
   useEffect(() => {
     dispatch(verificationProcessActions.getAllByCompany(company?.id ?? 0));
+    dispatch(verificationConfirmRequirementActions.getPendingByCompanyId(company?.id ?? 0));
   }, []);
 
   const columns: IDataTableColumn<VerificationProcess>[] = [
@@ -57,6 +61,17 @@ const CompanySelfVerification = (props: Props) => {
   return (
     <div>
       <Title order={1}>Tự đánh giá</Title>
+
+      {
+        !_.isEmpty(verificationConfirmRequirements) &&
+          _.map(verificationConfirmRequirements, (item) => (
+            <Alert title="Thông báo" color="teal" key={item.id} style={{ marginTop: '12px' }}>
+              <Text>Bạn có lịch hẹn với cán bộ để xác thực thông tin đánh giá của bạn.</Text>
+              <Text>Địa điểm: {item.scheduledLocation ?? ''}</Text>
+              <Text>Thời gian: {dayjs(item.scheduledTime).format(DEFAULT_DATETIME_FORMAT)}</Text>
+            </Alert>
+          ))
+      }
       
       {
         pendingProcess && (

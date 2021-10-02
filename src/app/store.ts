@@ -9,6 +9,7 @@ import verificationProcessReducer, { VerificationProcessActionTypes } from '../c
 import criteriaTypeReducer, { CriteriaTypeActionTypes } from '../common/reducers/criteriaType.reducer';
 import criteriaReducer, { CriteriaActionTypes } from '../common/reducers/criteria.reducer';
 import companySelfVerificationReducer, { CompanySelfVerificationActionTypes } from '../pages/Company/SelfVerification/reducer';
+import verificationConfirmRequirementReducer, { VerificationConfirmRequirementActionTypes } from '../common/reducers/verificationConfirmRequirement.reducer';
 
 const getMiddleware = () => {
   if (process.env.NODE_ENV === 'production') {
@@ -24,6 +25,7 @@ const allReducers = combineReducers({
   companySelfVerification: companySelfVerificationReducer,
   criteriaType: criteriaTypeReducer,
   criteria: criteriaReducer,
+  verificationConfirmRequirement: verificationConfirmRequirementReducer,
   verificationProcess: verificationProcessReducer,
 });
 
@@ -39,6 +41,7 @@ export type AppActions =
   | CompanySelfVerificationActionTypes
   | CriteriaTypeActionTypes
   | CriteriaActionTypes
+  | VerificationConfirmRequirementActionTypes
   | VerificationProcessActionTypes;
 
 export type AppDispatch = ThunkDispatch<RootState, void, AppActions>;

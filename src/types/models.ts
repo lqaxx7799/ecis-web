@@ -42,6 +42,12 @@ export interface Company extends BaseModel {
   isVerified: boolean;
 };
 
+export interface CompanyType extends BaseModel {
+  id: number;
+  typeName: string;
+  description: string;
+};
+
 export interface VerificationProcess extends BaseModel {
   id: number;
   submitDeadline?: Date;
@@ -51,10 +57,12 @@ export interface VerificationProcess extends BaseModel {
   validTo?: Date;
   isOpenedByAgent: boolean;
   isSubmitted: boolean;
+  isReviewed: boolean;
   submitMethod: string;
   companyTypeId?: number;
   assignedAgentId?: number;
   companyId: number;
+  company: Company;
 };
 
 export interface VerificationCriteria extends BaseModel {
@@ -75,6 +83,12 @@ export interface VerificationDocument extends BaseModel {
   verificationCriteriaId: number;
 };
 
+export interface DocumentReview extends BaseModel {
+  id: number;
+  content: string;
+  verificationDocumentId: number;
+};
+
 export interface Agent extends BaseModel {
   id: number;
   firstName: string;
@@ -84,4 +98,38 @@ export interface Agent extends BaseModel {
   gender: string;
   address: string;
   accountId: number;
+};
+
+export interface VerificationConfirmRequirement extends BaseModel {
+  id: number; 
+  scheduledTime: Date;
+  scheduledLocation: string; 
+  announcedAgentAt?: Date; 
+  announcedCompanyAt?: Date;
+  confirmedAt?: Date; 
+
+  announceAgentDocumentContent?: string;
+  announceAgentDocumentUrl?: string;
+  announceAgentDocumentType?: string;
+  announceAgentDocumentSize?: number;
+  announceAgentDocumentName?: string;
+  isUsingAnnounceAgentFile: boolean;
+
+  announceCompanyDocumentContent?: string;
+  announceCompanyDocumentUrl?: string;
+  announceCompanyDocumentType?: string;
+  announceCompanyDocumentSize?: number;
+  announceCompanyDocumentName?: string;
+  isUsingAnnounceCompanyFile: boolean;
+
+  confirmDocumentContent?: string;
+  confirmDocumentUrl?: string;
+  confirmDocumentType?: string;
+  confirmDocumentSize?: number;
+  confirmDocumentName?: string;
+  isUsingConfirmFile: boolean;
+
+  verificationProcessId: number;
+  assignedAgentId: number;
+  confirmCompanyTypeId: number;
 };
