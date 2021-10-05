@@ -89,6 +89,13 @@ body {
   padding: 16px;
 }
 
+.home-link-list {
+  .link-item {
+    display: block;
+    margin-bottom: 8px;
+  }
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
