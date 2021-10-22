@@ -93,6 +93,23 @@ const CompanySelfVerification = (props: Props) => {
           </div>
         )
       }
+      {
+        !pendingProcess && (
+          <div style={{ marginTop: '24px' }}>
+            <Text>
+              Bạn đang có thể yêu cầu đánh giá trước thời hạn nếu doanh nghiệp của bạn đã đủ
+              điều kiện.
+            </Text>
+            <Button
+              style={{ marginTop: '12px' }}
+              component={Link}
+              to="/doanh-nghiep/yeu-cau-tu-danh-gia"
+            >
+              Yêu cầu
+            </Button>
+          </div>
+        )
+      }
 
       <div style={{ marginTop: '24px' }}>
         <LoadingOverlay visible={loading} />

@@ -147,3 +147,26 @@ export interface CompanyTypeModification extends BaseModel {
   company: Company;
   updatedCompanyType: CompanyType;
 };
+
+export interface CompanyReport extends BaseModel {
+  id: number;
+  actionTitle: string;
+  description: string;
+  acceptedAt?: Date;
+  handledAt?: Date;
+  isHandled: boolean;
+  verificationProcessId: number;
+  companyReportTypeId: number;
+  targetedCompanyId: number;
+  creatorCompanyId: number;
+  assignedAgentId: number;
+};
+
+export interface CompanyReportDocument extends BaseModel {
+  id: number;
+  documentType: string;
+  documentUrl: string;
+  documentName: string;
+  documentSize: number;
+  companyReportId: number;
+};
