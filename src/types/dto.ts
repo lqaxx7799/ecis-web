@@ -1,3 +1,5 @@
+import { CompanyReportDocument } from "./models";
+
 export interface CompanyRegistrationDTO {
   email: string;
   companyCode: string;
@@ -15,4 +17,12 @@ export interface UploadFileResponseDTO {
   type: string;
   size: number;
   url: string;
+};
+
+export interface CompanyReportDTO {
+  actionTitle: string;
+  description: string;
+  targetedCompanyId: number; 
+  creatorCompanyId: number; 
+  companyReportDocuments: Partial<CompanyReportDocument>[];
 };
