@@ -3,6 +3,7 @@ import { VerificationCriteria, VerificationDocument, VerificationProcess } from 
 export const VERIFICATION_PROCESS_LOADING = 'VERIFICATION_PROCESS_LOADING';
 export const VERIFICATION_PROCESS_LOADED = 'VERIFICATION_PROCESS_LOADED';
 export const VERIFICATION_PROCESS_LOAD_FAILED = 'VERIFICATION_PROCESS_LOAD_FAILED';
+export const VERIFICATION_PROCESS_DETAIL_LOADED = 'VERIFICATION_PROCESS_DETAIL_LOADED';
 
 interface VerificationProcessLoading {
   type: typeof VERIFICATION_PROCESS_LOADING;
@@ -17,19 +18,35 @@ interface VerificationProcessLoadFailed {
   type: typeof VERIFICATION_PROCESS_LOAD_FAILED;
 };
 
+interface VerificationProcessDetailLoaded {
+  type: typeof VERIFICATION_PROCESS_DETAIL_LOADED;
+  payload: {
+    editingProcess: VerificationProcess;
+    verificationCriterias: VerificationCriteria[];
+    verificationDocuments: VerificationDocument[];
+  };
+};
+
 export type VerificationProcessActionTypes = 
   | VerificationProcessLoading
   | VerificationProcessLoaded
-  | VerificationProcessLoadFailed;
+  | VerificationProcessLoadFailed
+  | VerificationProcessDetailLoaded;
 
 export type VerificationProcessState = {
   records: VerificationProcess[];
   loading: boolean;
+  editingProcess?: VerificationProcess;
+  verificationCriterias: VerificationCriteria[],
+  verificationDocuments: VerificationDocument[],
 };
 
 const initialState: VerificationProcessState = {
   records: [],
   loading: false,
+  editingProcess: undefined,
+  verificationCriterias: [],
+  verificationDocuments: [],
 };
 
 const verificationProcessReducer = (state = initialState, action: VerificationProcessActionTypes): VerificationProcessState => {
@@ -49,6 +66,14 @@ const verificationProcessReducer = (state = initialState, action: VerificationPr
       return {
         ...state,
         loading: false,
+      };
+    case VERIFICATION_PROCESS_DETAIL_LOADED:
+      return {
+        ...state,
+        loading: false,
+        editingProcess: action.payload.editingProcess,
+        verificationCriterias: action.payload.verificationCriterias,
+        verificationDocuments: action.payload.verificationDocuments,
       };
     default:
       return state;

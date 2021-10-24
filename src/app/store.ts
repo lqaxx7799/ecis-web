@@ -11,6 +11,7 @@ import criteriaReducer, { CriteriaActionTypes } from '../common/reducers/criteri
 import companySelfVerificationReducer, { CompanySelfVerificationActionTypes } from '../pages/Company/SelfVerification/reducer';
 import verificationConfirmRequirementReducer, { VerificationConfirmRequirementActionTypes } from '../common/reducers/verificationConfirmRequirement.reducer';
 import companyTypeModificationReducer, { CompanyTypeModificationActionTypes } from '../common/reducers/companyTypeModification.reducer';
+import companyTypeReducer, { CompanyTypeActionTypes } from '../common/reducers/companyType.reducer';
 
 const getMiddleware = () => {
   if (process.env.NODE_ENV === 'production') {
@@ -24,6 +25,7 @@ const enhancer = composeWithDevTools(applyMiddleware(...getMiddleware()));
 const allReducers = combineReducers({
   authentication: authenticationReducer,
   companySelfVerification: companySelfVerificationReducer,
+  companyType: companyTypeReducer,
   companyTypeModification: companyTypeModificationReducer,
   criteriaType: criteriaTypeReducer,
   criteria: criteriaReducer,
@@ -41,6 +43,7 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppActions =
   | AuthenticationActionTypes
   | CompanySelfVerificationActionTypes
+  | CompanyTypeActionTypes
   | CompanyTypeModificationActionTypes
   | CriteriaTypeActionTypes
   | CriteriaActionTypes
