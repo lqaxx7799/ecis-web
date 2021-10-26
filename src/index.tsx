@@ -8,6 +8,7 @@ import { store } from './app/store';
 import App from './app/App';
 
 import './styles/index.scss';
+import './styles/custom.css';
 import { GlobalStyles, MantineProvider, NormalizeCSS } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 

@@ -16,6 +16,7 @@ import CompanyDetailVerification from '../pages/Company/SelfVerification/compone
 import VerificationResult from '../pages/VerificationResult';
 import RequestVerification from '../pages/Company/SelfVerification/components/RequestVerification';
 import VerificationResultDetail from '../pages/VerificationResult/VerificationResultDetail';
+import BlankLayout from './BlankLayout';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -32,9 +33,12 @@ const App = () => {
   return (
     <div>
       <Switch>
+        <AppRoute path='/login' component={LogIn} layout={BlankLayout} />
+
+
         <AppRoute path='/dang-ky-doanh-nghiep' component={CompanyRegistration} layout={MainLayout} />
         <AppRoute path='/dang-ky-thanh-cong' component={RegistrationSuccess} layout={MainLayout} />
-        <AppRoute path='/dang-nhap' component={LogIn} layout={MainLayout} />
+        {/* <AppRoute path='/dang-nhap' component={LogIn} layout={MainLayout} /> */}
   
         <AppRoute path='/ket-qua-danh-gia/:id' component={VerificationResultDetail} layout={MainLayout} />
         <AppRoute path='/ket-qua-danh-gia' component={VerificationResult} layout={MainLayout} />
