@@ -15,7 +15,7 @@ interface CompanySelfVerificationDetailLoading {
 interface CompanySelfVerificationDetailLoaded {
   type: typeof COMPANY_SELF_VERIFICATION_DETAIL_LOADED;
   payload: {
-    editingProcess: VerificationProcess;
+    editingProcess?: VerificationProcess;
     verificationCriterias: VerificationCriteria[];
     verificationDocuments: VerificationDocument[];
   };

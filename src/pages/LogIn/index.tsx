@@ -35,7 +35,7 @@ const LogIn = () => {
   };
 
   return (
-    <body className="login" style={{ backgroundImage: 'url(/images/bg1.jpg)' , backgroundSize: 'cover' }}>
+    <div className="login" style={{ backgroundImage: 'url(/images/bg1.jpg)' , backgroundSize: 'cover', height: '100vh' }}>
       <div style={{ background: 'rgba(0,0,0,0.5)', position: 'absolute', width: '100%', height: '100vh' }}>
         <a className="hiddenanchor" id="signup"></a>
         <a className="hiddenanchor" id="signin"></a>
@@ -43,16 +43,50 @@ const LogIn = () => {
         <div className="login_wrapper">
           <div className="animate form login_form">
             <section className="login_content">
-              <form>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <h1><img src="/images/fpd_logo_small.png" alt="" />  Đăng nhập hệ thống</h1>
                 <div>
-                  <input type="text" className="form-control" placeholder="Email" required />
+                  <Controller
+                    name="email"
+                    control={control}
+                    rules={{ required: 'Không được để trống email' }}
+                    render={({ field: { ref, ...field } }) => (
+                      <div>
+                        <input
+                          {...field}
+                          ref={ref}
+                          type="text"
+                          className="form-control"
+                          placeholder="Email"
+                          required
+                        />
+                        {errors.email && <span>{errors.email.message}</span>}
+                      </div>
+                    )}
+                  />
                 </div>
                 <div>
-                  <input type="password" className="form-control" placeholder="Mật khẩu" required />
+                  <Controller
+                    name="password"
+                    control={control}
+                    rules={{ required: 'Không được để trống mật khẩu' }}
+                    render={({ field: { ref, ...field } }) => (
+                      <div>
+                        <input
+                          {...field}
+                          ref={ref}
+                          type="password"
+                          className="form-control"
+                          placeholder="Mật khẩu"
+                          required
+                        />
+                        {errors.password && <span>{errors.password.message}</span>}
+                      </div>
+                    )}
+                  />
                 </div>
                 <div>
-                  <a className="btn btn-default submit" href="dashboard.html">Đăng nhập</a>
+                  <button className="btn btn-default submit">Đăng nhập</button>
                   <a className="reset_pass" href="#">Quên mật khẩu ?</a>
                 </div>
 
@@ -111,61 +145,8 @@ const LogIn = () => {
           </div>
         </div>
       </div>
-    </body>
+    </div>
   );
-
-  // return (
-  //   <>
-  //     <Grid style={{ marginBottom: '18px' }}>
-  //       <Col span={12}>
-  //         <Title order={1}>Đăng nhập</Title>
-  //       </Col>
-  //     </Grid>
-  //     <Grid>
-  //       <Col span={6}>
-  //         <form onSubmit={handleSubmit(onSubmit)}>
-  //           <Controller
-  //             name="email"
-  //             control={control}
-  //             rules={{ required: 'Không được để trống email' }}
-  //             render={({ field: { ref, ...field } }) => (
-  //               <TextInput
-  //                 {...field}
-  //                 elementRef={ref}
-  //                 style={{
-  //                   marginBottom: '12px',
-  //                 }}
-  //                 label="Email"
-  //                 required
-  //                 placeholder="Nhập email"
-  //                 error={errors.email && errors.email.message}
-  //               />
-  //             )}
-  //           />
-  //           <Controller
-  //             name="password"
-  //             control={control}
-  //             rules={{ required: 'Không được để trống mật khẩu', }}
-  //             render={({ field: { ref, ...field } }) => (
-  //               <PasswordInput
-  //                 {...field}
-  //                 elementRef={ref}
-  //                 style={{
-  //                   marginBottom: '12px',
-  //                 }}
-  //                 label="Mật khẩu"
-  //                 required
-  //                 placeholder="Nhập mật khẩu"
-  //                 error={errors.password && errors.password.message}
-  //               />
-  //             )}
-  //           />
-  //           <Button  type="submit">Đăng nhập</Button>
-  //         </form>
-  //       </Col>
-  //     </Grid>
-  //   </>
-  // );
 };
 
 export default LogIn;
