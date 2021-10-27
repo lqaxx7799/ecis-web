@@ -4,7 +4,7 @@ import _ from "lodash";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../app/store";
-import companySelfVerificationActions from "../action";
+import companySelfVerificationActions from "../../../CompanySelfVerification/action";
 import CompanyEditVerificationCriteria from "./CompanyEditVerificationCriteria";
 import EditDocumentModal from "./EditDocumentModal";
 
@@ -29,7 +29,7 @@ const CompanyEditVerification = (props: Props) => {
   }, []);
 
   const groupedCriteria = _.groupBy(verificationCriterias, editingCriteria => {
-    const found = _.find(criterias, criteria => criteria.id === editingCriteria.criteriaId);
+    const found = _.find(criterias, criteria => criteria.id === editingCriteria.criteriaDetailId);
     return found?.criteriaTypeId;
   });
 

@@ -79,6 +79,16 @@ body {
   }
 }
 
+.inline-radio-group {
+  display: flex;
+  align-items: center;
+  input[type=radio] {
+    margin-top: 0px;
+    margin-left: 4px;
+    margin-right: 8px;
+  }
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;

@@ -8,10 +8,11 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import verificationProcessReducer, { VerificationProcessActionTypes } from '../common/reducers/verificationProcess.reducer';
 import criteriaTypeReducer, { CriteriaTypeActionTypes } from '../common/reducers/criteriaType.reducer';
 import criteriaReducer, { CriteriaActionTypes } from '../common/reducers/criteria.reducer';
-import companySelfVerificationReducer, { CompanySelfVerificationActionTypes } from '../pages/Company/SelfVerification/reducer';
+import companySelfVerificationReducer, { CompanySelfVerificationActionTypes } from '../pages/CompanySelfVerification/reducer';
 import verificationConfirmRequirementReducer, { VerificationConfirmRequirementActionTypes } from '../common/reducers/verificationConfirmRequirement.reducer';
 import companyTypeModificationReducer, { CompanyTypeModificationActionTypes } from '../common/reducers/companyTypeModification.reducer';
 import companyTypeReducer, { CompanyTypeActionTypes } from '../common/reducers/companyType.reducer';
+import criteriaDetailReducer, { CriteriaDetailActionTypes } from '../common/reducers/criteriaDetail.reducer';
 
 const getMiddleware = () => {
   if (process.env.NODE_ENV === 'production') {
@@ -27,8 +28,9 @@ const allReducers = combineReducers({
   companySelfVerification: companySelfVerificationReducer,
   companyType: companyTypeReducer,
   companyTypeModification: companyTypeModificationReducer,
-  criteriaType: criteriaTypeReducer,
   criteria: criteriaReducer,
+  criteriaDetail: criteriaDetailReducer,
+  criteriaType: criteriaTypeReducer,
   verificationConfirmRequirement: verificationConfirmRequirementReducer,
   verificationProcess: verificationProcessReducer,
 });
@@ -45,8 +47,9 @@ export type AppActions =
   | CompanySelfVerificationActionTypes
   | CompanyTypeActionTypes
   | CompanyTypeModificationActionTypes
-  | CriteriaTypeActionTypes
   | CriteriaActionTypes
+  | CriteriaDetailActionTypes
+  | CriteriaTypeActionTypes
   | VerificationConfirmRequirementActionTypes
   | VerificationProcessActionTypes;
 

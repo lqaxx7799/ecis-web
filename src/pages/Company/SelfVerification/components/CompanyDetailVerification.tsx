@@ -5,7 +5,7 @@ import _ from "lodash";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../app/store";
-import companySelfVerificationActions from "../action";
+import companySelfVerificationActions from "../../../CompanySelfVerification/action";
 import UploadedFileItem from "./UploadedFileItem";
 
 type Props = {
@@ -41,7 +41,7 @@ const CompanyDetailVerification = (props: Props) => {
   }
 
   const groupedCriteria = _.groupBy(verificationCriterias, editingCriteria => {
-    const found = _.find(criterias, criteria => criteria.id === editingCriteria.criteriaId);
+    const found = _.find(criterias, criteria => criteria.id === editingCriteria.criteriaDetailId);
     return found?.criteriaTypeId;
   });
 
@@ -93,7 +93,7 @@ const CompanyDetailVerification = (props: Props) => {
                   {_.map(criteriaList, (item, index) => {
                     const criteria = _.find(
                       criterias,
-                      (criteria) => criteria.id === item.criteriaId
+                      (criteria) => criteria.id === item.criteriaDetailId
                     );
                     const documents = _.filter(
                       verificationDocuments,

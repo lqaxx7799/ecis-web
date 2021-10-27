@@ -7,7 +7,7 @@ import { ChangeEvent, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../app/store";
 import fileServices from "../../../../common/services/file.services";
 import { Criteria, VerificationCriteria, VerificationDocument } from "../../../../types/models";
-import companySelfVerificationActions from "../action";
+import companySelfVerificationActions from "../../../CompanySelfVerification/action";
 
 type Props = {
   criteria?: Criteria;

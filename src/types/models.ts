@@ -32,6 +32,13 @@ export interface Criteria extends BaseModel {
   criteriaTypeId: number;
 };
 
+export interface CriteriaDetail extends BaseModel {
+  id: number;
+  criteriaDetailName: string;
+  description: string;
+  criteriaId: number;
+};
+
 export interface Company extends BaseModel {
   id: number;
   companyCode: string;
@@ -68,8 +75,10 @@ export interface VerificationProcess extends BaseModel {
 export interface VerificationCriteria extends BaseModel {
   id: number;
   approvedStatus?: string;
+  companyOpinion: string;
+  companyRate?: boolean;
   verificationProcessId?: number;
-  criteriaId?: number;
+  criteriaDetailId?: number;
 };
 
 export interface VerificationDocument extends BaseModel {

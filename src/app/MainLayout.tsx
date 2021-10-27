@@ -1,5 +1,6 @@
 import { Button, Container, Divider, Menu, MenuItem, MenuLabel, Text, Title } from '@mantine/core';
 import { PersonIcon, PinLeftIcon, TriangleDownIcon } from '@radix-ui/react-icons';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import authenticationActions from '../common/actions/authentication.actions';
 import { useAppDispatch, useAppSelector } from './store';
@@ -12,6 +13,12 @@ type Props = {
 const MainLayout = ({ children, isBleedLayout }: Props) => {
   const dispatch = useAppDispatch();
   const authentication = useAppSelector((state) => state.authentication);
+
+  const [activeSideItem, setActiveSideItem] = useState('');
+
+  const onSidebarClick = (key: string) => {
+    setActiveSideItem((current) => current === key ? '' : key);
+  };
 
   const logOut = () => {
     dispatch(authenticationActions.logOut());
@@ -26,7 +33,7 @@ const MainLayout = ({ children, isBleedLayout }: Props) => {
               <div className="navbar nav_title" style={{ border: 0 }}>
                 <a href="index.html" className="site_title">
                   <img src="images/fpd_logo_small.png" />
-                  <span>Công ty A</span>
+                  <span>{authentication.company?.companyNameVI}</span>
                 </a>
               </div>
 
@@ -38,7 +45,7 @@ const MainLayout = ({ children, isBleedLayout }: Props) => {
                 </div>
                 <div className="profile_info">
                   <span>Xin chào,</span>
-                  <h2>Ông A</h2>
+                  <h2>{authentication.account?.email}</h2>
                 </div>
                 <div className="clearfix"></div>
               </div>
@@ -51,37 +58,65 @@ const MainLayout = ({ children, isBleedLayout }: Props) => {
                 <div className="menu_section">
                   <h3>Thông tin chung</h3>
                   <ul className="nav side-menu">
-                    <li>
+                    <li
+                      key="home"
+                      className={`${activeSideItem === 'home' ? 'active' : ''}`}
+                      onClick={() => onSidebarClick('home')}
+                    >
                       <a>
                         <i className="fa fa-home"></i> Trang chủ <span className="fa fa-chevron-down" />
                       </a>
-                      <ul className="nav child_menu">
-                        <li><a href="dashboard.html">Dashboard</a></li>
+                      <ul
+                        className="nav child_menu"
+                        style={{ display: activeSideItem === 'home' ? 'block' : 'none' }}
+                      >
+                        <li><Link to="/">Dashboard</Link></li>
                       </ul>
                     </li>
-                    <li>
+                    <li
+                      key="review"
+                      className={`${activeSideItem === 'review' ? 'active' : ''}`}
+                      onClick={() => onSidebarClick('review')}
+                    >
                       <a>
                         <i className="fa fa-edit"></i> Đánh giá, Phân loại<span className="fa fa-chevron-down" />
                       </a>
-                      <ul className="nav child_menu">                  
-                        <li><a href="company-self-evaluation.html">Tự đánh giá</a></li>
+                      <ul
+                        className="nav child_menu"
+                        style={{ display: activeSideItem === 'review' ? 'block' : 'none' }}
+                      >                  
+                        <li><Link to="/company-self-verification">Tự đánh giá</Link></li>
                         <li><a href="evaluation_result.html">Kết quả xác minh đánh giá</a></li>
                         <li><a href="evaluation_result_comment.html">Khiếu nại kết quả</a></li>
                       </ul>
                     </li>
-                    <li>
+                    <li
+                      key="info"
+                      className={`${activeSideItem === 'info' ? 'active' : ''}`}
+                      onClick={() => onSidebarClick('info')}
+                    >
                       <a>
                         <i className="fa fa-edit"></i> Thông tin Doanh Nghiệp<span className="fa fa-chevron-down" />
                       </a>
-                      <ul className="nav child_menu">
+                      <ul
+                        className="nav child_menu"
+                        style={{ display: activeSideItem === 'info' ? 'block' : 'none' }}
+                      >
                         <li><a href="copany_profile.html">Cập nhật thông tin liên hệ</a></li>
                       </ul>
                     </li>
-                    <li>
+                    <li
+                      key="relationship"
+                      className={`${activeSideItem === 'relationship' ? 'active' : ''}`}
+                      onClick={() => onSidebarClick('relationship')}
+                    >
                       <a>
                         <i className="fa fa-desktop"></i> Quan hệ kinh doanh <span className="fa fa-chevron-down"/>
                       </a>
-                      <ul className="nav child_menu">
+                      <ul
+                        className="nav child_menu"
+                        style={{ display: activeSideItem === 'relationship' ? 'block' : 'none' }}
+                      >
                         <li><a href="suppliers.html">Nhà cung cấp</a></li>
                         <li><a href="clients.html">Khánh hàng</a></li>
                       </ul>

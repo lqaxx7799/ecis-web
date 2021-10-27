@@ -1,4 +1,4 @@
-import { VerificationCriteria, VerificationDocument, VerificationProcess } from "../../../types/models";
+import { VerificationCriteria, VerificationDocument, VerificationProcess } from "../../types/models";
 
 export const COMPANY_SELF_VERIFICATION_DETAIL_LOADING = 'COMPANY_SELF_VERIFICATION_DETAIL_LOADING';
 export const COMPANY_SELF_VERIFICATION_DETAIL_LOADED = 'COMPANY_SELF_VERIFICATION_DETAIL_LOADED';
@@ -7,6 +7,8 @@ export const COMPANY_SELF_VERIFICATION_DOCUMENTS_UPDATED = 'COMPANY_SELF_VERIFIC
 export const COMPANY_SELF_VERIFICATION_DOCUMENT_CREATED = 'COMPANY_SELF_VERIFICATION_DOCUMENT_CREATED';
 export const COMPANY_SELF_VERIFICATION_DOCUMENT_EDITED = 'COMPANY_SELF_VERIFICATION_DOCUMENT_EDITED';
 export const COMPANY_SELF_VERIFICATION_DOCUMENT_MODAL_STATE_CHANGED = 'COMPANY_SELF_VERIFICATION_DOCUMENT_MODAL_STATE_CHANGED';
+export const COMPANY_SELF_VERIFICATION_CRITERIA_UPDATED = 'COMPANY_SELF_VERIFICATION_CRITERIA_UPDATED';
+export const COMPANY_SELF_VERIFICATION_PROCESS_UPDATED = 'COMPANY_SELF_VERIFICATION_PROCESS_UPDATED';
 
 interface CompanySelfVerificationDetailLoading {
   type: typeof COMPANY_SELF_VERIFICATION_DETAIL_LOADING;
@@ -45,6 +47,16 @@ interface CompanySelfVerificationDocumentsUpdated {
   payload: VerificationDocument[];
 };
 
+interface CompanySelfVerificationCriteriaUpdated {
+  type: typeof COMPANY_SELF_VERIFICATION_CRITERIA_UPDATED;
+  payload: VerificationCriteria[];
+}
+
+interface CompanySelfVerificationProcessUpdated {
+  type: typeof COMPANY_SELF_VERIFICATION_PROCESS_UPDATED;
+  payload: VerificationProcess;
+}
+
 export type CompanySelfVerificationActionTypes =
   | CompanySelfVerificationDetailLoading
   | CompanySelfVerificationDetailLoaded
@@ -52,7 +64,9 @@ export type CompanySelfVerificationActionTypes =
   | CompanySelfVerificationDocumentCreated
   | CompanySelfVerificationDocumentEdited
   | CompanySelfVerificationDocumentModalStateChanged
-  | CompanySelfVerificationDocumentsUpdated;
+  | CompanySelfVerificationDocumentsUpdated
+  | CompanySelfVerificationCriteriaUpdated
+  | CompanySelfVerificationProcessUpdated;
 
 export type CompanySelfVerificationState = {
   loading: boolean;
@@ -115,6 +129,16 @@ const companySelfVerificationReducer = (
       return {
         ...state,
         verificationDocuments: action.payload,
+      };
+    case "COMPANY_SELF_VERIFICATION_CRITERIA_UPDATED":
+      return {
+        ...state,
+        verificationCriterias: action.payload,
+      };
+    case "COMPANY_SELF_VERIFICATION_PROCESS_UPDATED":
+      return {
+        ...state,
+        editingProcess: action.payload,
       };
     default:
       return state;

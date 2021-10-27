@@ -8,7 +8,7 @@ import { DEFAULT_DATETIME_FORMAT } from "../../../../common/constants/app";
 import helpers from "../../../../common/utils/helpers";
 import config from "../../../../config";
 import { VerificationDocument } from "../../../../types/models";
-import companySelfVerificationActions from "../action";
+import companySelfVerificationActions from "../../../CompanySelfVerification/action";
 
 type Props = {
 

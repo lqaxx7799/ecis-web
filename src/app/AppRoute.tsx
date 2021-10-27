@@ -28,7 +28,7 @@ const AppRoute = ({
             <Component {...props} />
           </Layout>
         ) : (
-          <Redirect to='/' />
+          <Redirect to='/login' />
         )
       }
     />

@@ -49,7 +49,7 @@ const App = () => {
       {/* <AppRoute path="/doanh-nghiep/tu-danh-gia" component={CompanySelfVerification} layout={CompanyLayout} needAuth roles={["Company"]} /> */}
       {/* <AppRoute path="/doanh-nghiep" component={CompanyDashboard} layout={CompanyLayout} needAuth roles={["Company"]} /> */}
 
-      <AppRoute exact path='/' component={Dashboard} layout={MainLayout} />
+      <AppRoute exact path='/' component={Dashboard} layout={MainLayout} needAuth roles={["Company"]} />
     </Switch>
   );
 }
