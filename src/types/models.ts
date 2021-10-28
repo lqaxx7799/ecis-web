@@ -77,6 +77,8 @@ export interface VerificationCriteria extends BaseModel {
   approvedStatus?: string;
   companyOpinion: string;
   companyRate?: boolean;
+  reviewResult: string;
+  reviewComment: string;
   verificationProcessId?: number;
   criteriaDetailId?: number;
 };

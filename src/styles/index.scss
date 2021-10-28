@@ -82,10 +82,14 @@ body {
 .inline-radio-group {
   display: flex;
   align-items: center;
+  margin-bottom: 8px;
   input[type=radio] {
     margin-top: 0px;
     margin-left: 4px;
     margin-right: 8px;
+  }
+  label {
+    margin-bottom: 0px;
   }
 }
 

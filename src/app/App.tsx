@@ -18,6 +18,8 @@ import RequestVerification from '../pages/Company/SelfVerification/components/Re
 import VerificationResultDetail from '../pages/VerificationResult/VerificationResultDetail';
 import BlankLayout from './BlankLayout';
 import CompanySelfVerification from '../pages/CompanySelfVerification/components';
+import SelfVerificationResult from '../pages/SelfVerificationResult/components';
+import NotFound from '../pages/NotFound/components';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -35,6 +37,7 @@ const App = () => {
     <Switch>
       <AppRoute path='/login' component={LogIn} layout={BlankLayout} />
       <AppRoute path="/company-self-verification" component={CompanySelfVerification} layout={MainLayout} needAuth roles={["Company"]} />
+      <AppRoute path="/verification-result" component={SelfVerificationResult} layout={MainLayout} needAuth roles={["Company"]} />
 
       <AppRoute path='/dang-ky-doanh-nghiep' component={CompanyRegistration} layout={MainLayout} />
       <AppRoute path='/dang-ky-thanh-cong' component={RegistrationSuccess} layout={MainLayout} />
@@ -50,6 +53,7 @@ const App = () => {
       {/* <AppRoute path="/doanh-nghiep" component={CompanyDashboard} layout={CompanyLayout} needAuth roles={["Company"]} /> */}
 
       <AppRoute exact path='/' component={Dashboard} layout={MainLayout} needAuth roles={["Company"]} />
+      <AppRoute component={NotFound} layout={MainLayout} needAuth roles={["Company"]} />
     </Switch>
   );
 }

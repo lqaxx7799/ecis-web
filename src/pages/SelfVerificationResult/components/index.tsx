@@ -1,14 +1,14 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
-import companySelfVerificationActions from "../action";
+import companySelfVerificationActions from "../../CompanySelfVerification/action";
 import CriteriaListTab from "./CriteriaListTab";
 
 type Props = {
 
 };
 
-const CompanySelfVerification = (props: Props) => {
+const SelfVerificationResult = (props: Props) => {
   const dispatch = useAppDispatch();
   const {
     loading,
@@ -96,4 +96,4 @@ const CompanySelfVerification = (props: Props) => {
   );
 };
 
-export default CompanySelfVerification;
+export default SelfVerificationResult;

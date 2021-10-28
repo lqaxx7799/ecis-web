@@ -32,7 +32,7 @@ const MainLayout = ({ children, isBleedLayout }: Props) => {
             <div className="left_col scroll-view">
               <div className="navbar nav_title" style={{ border: 0 }}>
                 <a href="index.html" className="site_title">
-                  <img src="/images/fpd_logo_small.png" />
+                  <img src="/images/fpd_logo_small.png" alt="" />
                   <span>{authentication.company?.companyNameVI}</span>
                 </a>
               </div>
@@ -86,8 +86,8 @@ const MainLayout = ({ children, isBleedLayout }: Props) => {
                         style={{ display: activeSideItem === 'review' ? 'block' : 'none' }}
                       >                  
                         <li><Link to="/company-self-verification">Tự đánh giá</Link></li>
-                        <li><a href="evaluation_result.html">Kết quả xác minh đánh giá</a></li>
-                        <li><a href="evaluation_result_comment.html">Khiếu nại kết quả</a></li>
+                        <li><Link to="/verification-result">Kết quả xác minh đánh giá</Link></li>
+                        <li><Link to="/verification-report">Khiếu nại kết quả</Link></li>
                       </ul>
                     </li>
                     <li
@@ -102,7 +102,7 @@ const MainLayout = ({ children, isBleedLayout }: Props) => {
                         className="nav child_menu"
                         style={{ display: activeSideItem === 'info' ? 'block' : 'none' }}
                       >
-                        <li><a href="copany_profile.html">Cập nhật thông tin liên hệ</a></li>
+                        <li><Link to="/company-profile">Cập nhật thông tin liên hệ</Link></li>
                       </ul>
                     </li>
                     <li
@@ -117,8 +117,8 @@ const MainLayout = ({ children, isBleedLayout }: Props) => {
                         className="nav child_menu"
                         style={{ display: activeSideItem === 'relationship' ? 'block' : 'none' }}
                       >
-                        <li><a href="suppliers.html">Nhà cung cấp</a></li>
-                        <li><a href="clients.html">Khánh hàng</a></li>
+                        <li><Link to="/suppliers">Nhà cung cấp</Link></li>
+                        <li><Link to="/clients">Khánh hàng</Link></li>
                       </ul>
                     </li>                  
                   </ul>
