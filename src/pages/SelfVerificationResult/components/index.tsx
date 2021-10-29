@@ -72,9 +72,6 @@ const SelfVerificationResult = (props: Props) => {
             ))
           }
         </div>
-        <div style={{ marginTop: '24px' }}>
-          <button onClick={submitVerification}>Gửi lên</button>
-        </div>
       </div>
     </>
   );
@@ -82,7 +79,7 @@ const SelfVerificationResult = (props: Props) => {
   return (
     <div className="x_panel">
       <div className="x_title">
-        <h2>Doanh nghiệp tự đánh giá</h2>
+        <h2>Kết quả xác minh đánh giá</h2>
         <div className="clearfix" />
       </div>
       <div className="x_content">
