@@ -19,7 +19,7 @@ const SelfVerificationResult = (props: Props) => {
   const [selectedTabId, setSelectedTabId] = useState(-1);
 
   useEffect(() => {
-    dispatch(companySelfVerificationActions.loadCurrentSelfVerification())
+    dispatch(companySelfVerificationActions.loadLastSelfVerification())
       .then(() => {
         setSelectedTabId(_.get(criteriaTypes, '0.id'));
       });

@@ -98,7 +98,7 @@ function loadSelfVerification(processId: number): AppThunk<Promise<VerificationP
   };
 }
 
-function loadCurrentSelfVerification(): AppThunk<Promise<VerificationProcess | null>> {
+function loadCurrentPendingSelfVerification(): AppThunk<Promise<VerificationProcess | null>> {
   return async (dispatch: AppDispatch, getState) => {
     const state = getState();
     const { company } = state.authentication;
@@ -109,7 +109,55 @@ function loadCurrentSelfVerification(): AppThunk<Promise<VerificationProcess | n
       type: 'COMPANY_SELF_VERIFICATION_DETAIL_LOADING',
     });
     try {
-      const process = await verificationProcessServices.getCurrentByCompanyId(company.id);
+      const process = await verificationProcessServices.getCurrentPendingByCompanyId(company.id);
+      if (!process) {
+        dispatch<CompanySelfVerificationActionTypes>({
+          type: 'COMPANY_SELF_VERIFICATION_DETAIL_LOADED',
+          payload: {
+            editingProcess: undefined,
+            verificationCriterias: [],
+            verificationDocuments: [],
+          },
+        });
+        return null;
+      }
+      const [criterias, documents] = await Promise.all([
+        verificationCriteriaServices.getAllByProcessId(process.id),
+        verificationDocumentServices.getAllByProcessId(process.id),
+        dispatch(criteriaActions.getAll()),
+        dispatch(criteriaTypeActions.getAll()),
+        dispatch(criteriaDetailActions.getAll()),
+      ]);
+      dispatch<CompanySelfVerificationActionTypes>({
+        type: 'COMPANY_SELF_VERIFICATION_DETAIL_LOADED',
+        payload: {
+          editingProcess: process,
+          verificationCriterias: criterias,
+          verificationDocuments: documents,
+        },
+      });
+      return process;
+    } catch (e) {
+      dispatch<CompanySelfVerificationActionTypes>({
+        type: 'COMPANY_SELF_VERIFICATION_DETAIL_LOAD_FAILED',
+      });
+      return null;
+    }
+  };
+}
+
+function loadLastSelfVerification(): AppThunk<Promise<VerificationProcess | null>> {
+  return async (dispatch: AppDispatch, getState) => {
+    const state = getState();
+    const { company } = state.authentication;
+    if (!company) {
+      return null;
+    }
+    dispatch<CompanySelfVerificationActionTypes>({
+      type: 'COMPANY_SELF_VERIFICATION_DETAIL_LOADING',
+    });
+    try {
+      const process = await verificationProcessServices.getLastByCompanyId(company.id);
       if (!process) {
         dispatch<CompanySelfVerificationActionTypes>({
           type: 'COMPANY_SELF_VERIFICATION_DETAIL_LOADED',
@@ -174,7 +222,8 @@ function submitVerificationProcess(processId: number): AppThunk<Promise<Verifica
 
 const companySelfVerificationActions = {
   loadSelfVerification,
-  loadCurrentSelfVerification,
+  loadCurrentPendingSelfVerification,
+  loadLastSelfVerification,
   createDocument,
   editDocument,
   updateDocument,

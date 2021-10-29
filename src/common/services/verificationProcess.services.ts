@@ -9,8 +9,12 @@ function getById(id: number): Promise<VerificationProcess> {
   return request.get(`/VerificationProcess/${id}`);
 }
 
-function getCurrentByCompanyId(companyId: number): Promise<VerificationProcess> {
-  return request.get(`/VerificationProcess/GetCurrent/${companyId}`);
+function getCurrentPendingByCompanyId(companyId: number): Promise<VerificationProcess> {
+  return request.get(`/VerificationProcess/GetCurrentPending/${companyId}`);
+}
+
+function getLastByCompanyId(companyId: number): Promise<VerificationProcess> {
+  return request.get(`/VerificationProcess/GetLast/${companyId}`);
 }
 
 function submit(processId: number): Promise<VerificationProcess> {
@@ -19,7 +23,8 @@ function submit(processId: number): Promise<VerificationProcess> {
 
 const verificationProcessServices = {
   getAllByCompany,
-  getCurrentByCompanyId,
+  getCurrentPendingByCompanyId,
+  getLastByCompanyId,
   getById,
   process,
   submit,

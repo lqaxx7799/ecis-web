@@ -167,7 +167,9 @@ html , body{
 .nav-sm .container.body .right_col {
     padding: 10px 20px;
     margin-left: 70px;
-    z-index: 2
+    z-index: 2;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
 }
 .nav-sm .navbar.nav_title {
     width: 70px
@@ -329,7 +331,6 @@ html , body{
     float: left;
     background: #EDEDED;
     border-bottom: 1px solid #D9DEE4;
-    margin-bottom: 10px;
     width: 100%;
     position: relative
 }
@@ -358,7 +359,7 @@ body .container.body .right_col {
 .nav-md .container.body .right_col {
     padding: 10px 20px 0;
     margin-left: 230px;
-    height: calc(100vh - 58px);
+    height: calc(100vh - 60px);
     overflow-y: auto;
 }
 .nav_title {
