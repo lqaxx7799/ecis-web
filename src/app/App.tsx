@@ -20,6 +20,7 @@ import BlankLayout from './BlankLayout';
 import CompanySelfVerification from '../pages/CompanySelfVerification/components';
 import SelfVerificationResult from '../pages/SelfVerificationResult/components';
 import NotFound from '../pages/NotFound/components';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -34,27 +35,30 @@ const App = () => {
   }
 
   return (
-    <Switch>
-      <AppRoute path='/login' component={LogIn} layout={BlankLayout} />
-      <AppRoute path="/company-self-verification" component={CompanySelfVerification} layout={MainLayout} needAuth roles={["Company"]} />
-      <AppRoute path="/verification-result" component={SelfVerificationResult} layout={MainLayout} needAuth roles={["Company"]} />
+    <>
+      <Switch>
+        <AppRoute path='/login' component={LogIn} layout={BlankLayout} />
+        <AppRoute path="/company-self-verification" component={CompanySelfVerification} layout={MainLayout} needAuth roles={["Company"]} />
+        <AppRoute path="/verification-result" component={SelfVerificationResult} layout={MainLayout} needAuth roles={["Company"]} />
 
-      <AppRoute path='/dang-ky-doanh-nghiep' component={CompanyRegistration} layout={MainLayout} />
-      <AppRoute path='/dang-ky-thanh-cong' component={RegistrationSuccess} layout={MainLayout} />
-      {/* <AppRoute path='/dang-nhap' component={LogIn} layout={MainLayout} /> */}
+        <AppRoute path='/dang-ky-doanh-nghiep' component={CompanyRegistration} layout={MainLayout} />
+        <AppRoute path='/dang-ky-thanh-cong' component={RegistrationSuccess} layout={MainLayout} />
+        {/* <AppRoute path='/dang-nhap' component={LogIn} layout={MainLayout} /> */}
 
-      <AppRoute path='/ket-qua-danh-gia/:id' component={VerificationResultDetail} layout={MainLayout} />
-      <AppRoute path='/ket-qua-danh-gia' component={VerificationResult} layout={MainLayout} />
+        <AppRoute path='/ket-qua-danh-gia/:id' component={VerificationResultDetail} layout={MainLayout} />
+        <AppRoute path='/ket-qua-danh-gia' component={VerificationResult} layout={MainLayout} />
 
-      <AppRoute path="/doanh-nghiep/yeu-cau-tu-danh-gia" component={RequestVerification} layout={CompanyLayout} needAuth roles={["Company"]} />
-      <AppRoute path="/doanh-nghiep/tu-danh-gia/chi-tiet/:id" component={CompanyDetailVerification} layout={CompanyLayout} needAuth roles={["Company"]} />
-      <AppRoute path="/doanh-nghiep/tu-danh-gia/sua/:id" component={CompanyEditVerification} layout={CompanyLayout} needAuth roles={["Company"]} />
-      {/* <AppRoute path="/doanh-nghiep/tu-danh-gia" component={CompanySelfVerification} layout={CompanyLayout} needAuth roles={["Company"]} /> */}
-      {/* <AppRoute path="/doanh-nghiep" component={CompanyDashboard} layout={CompanyLayout} needAuth roles={["Company"]} /> */}
+        <AppRoute path="/doanh-nghiep/yeu-cau-tu-danh-gia" component={RequestVerification} layout={CompanyLayout} needAuth roles={["Company"]} />
+        <AppRoute path="/doanh-nghiep/tu-danh-gia/chi-tiet/:id" component={CompanyDetailVerification} layout={CompanyLayout} needAuth roles={["Company"]} />
+        <AppRoute path="/doanh-nghiep/tu-danh-gia/sua/:id" component={CompanyEditVerification} layout={CompanyLayout} needAuth roles={["Company"]} />
+        {/* <AppRoute path="/doanh-nghiep/tu-danh-gia" component={CompanySelfVerification} layout={CompanyLayout} needAuth roles={["Company"]} /> */}
+        {/* <AppRoute path="/doanh-nghiep" component={CompanyDashboard} layout={CompanyLayout} needAuth roles={["Company"]} /> */}
 
-      <AppRoute exact path='/' component={Dashboard} layout={MainLayout} needAuth roles={["Company"]} />
-      <AppRoute component={NotFound} layout={MainLayout} needAuth roles={["Company"]} />
-    </Switch>
+        <AppRoute exact path='/' component={Dashboard} layout={MainLayout} needAuth roles={["Company"]} />
+        <AppRoute component={NotFound} layout={MainLayout} needAuth roles={["Company"]} />
+      </Switch>
+      <ToastContainer />
+    </>
   );
 }
 

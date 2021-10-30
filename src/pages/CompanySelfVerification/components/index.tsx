@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
 import companySelfVerificationActions from "../action";
 import CriteriaListTab from "./CriteriaListTab";
@@ -28,10 +29,10 @@ const CompanySelfVerification = (props: Props) => {
   const submitVerification = () => {
     dispatch(companySelfVerificationActions.submitVerificationProcess(editingProcess?.id ?? 0))
       .then(() => {
-        console.log('ok');
+        toast.success('Gửi đánh giá thành công.');
       })
       .catch(() => {
-        console.log('no')
+        toast.error('Đã có lỗi xảy ra trong quá trình gửi đánh giá. Vui lòng thử lại sau.');
       });
   };
 

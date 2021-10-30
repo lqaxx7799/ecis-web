@@ -1,4 +1,5 @@
-import React from 'react';
+import { GlobalStyles, MantineProvider, NormalizeCSS } from '@mantine/core';
+import { NotificationsProvider } from '@mantine/notifications';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -9,14 +10,12 @@ import App from './app/App';
 
 import './styles/index.scss';
 import './styles/custom.css';
-import { GlobalStyles, MantineProvider, NormalizeCSS } from '@mantine/core';
-import { NotificationsProvider } from '@mantine/notifications';
 
 ReactDOM.render(
   <MantineProvider>
     <NotificationsProvider>
-      <NormalizeCSS />
-      <GlobalStyles />
+      {/* <NormalizeCSS />
+      <GlobalStyles /> */}
       <Provider store={store}>
         <Router>
           <Switch>

@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { ChangeEvent, useRef, useState } from "react";
+import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
 import verificationDocumentActions from "../../../common/actions/verificationDocument.action";
 import fileServices from "../../../common/services/file.services";
@@ -29,7 +30,13 @@ const CriteriaForm = (props: Props) => {
       ...currentCriteria,
       companyRate: rate,
     };
-    dispatch(companySelfVerificationActions.updateVerificationCriteria(updated));
+    dispatch(companySelfVerificationActions.updateVerificationCriteria(updated))
+      .then(() => {
+        toast.success('Cập nhật đánh giá thành công.');
+      })
+      .catch(() => {
+        toast.error('Đã xảy ra lỗi trong quá trình cập nhật đánh giá. Vui lòng thử lại sau.');
+      });
   };
 
   const updateCompanyOpinion = () => {
@@ -37,7 +44,13 @@ const CriteriaForm = (props: Props) => {
       ...currentCriteria,
       companyOpinion: opinion,
     };
-    dispatch(companySelfVerificationActions.updateVerificationCriteria(updated));
+    dispatch(companySelfVerificationActions.updateVerificationCriteria(updated))
+      .then(() => {
+        toast.success('Cập nhật đánh giá thành công.');
+      })
+      .catch(() => {
+        toast.error('Đã xảy ra lỗi trong quá trình cập nhật đánh giá. Vui lòng thử lại sau.');
+      });
   };
 
   const handleUploadedFiles = (e: ChangeEvent<HTMLInputElement>) => {
@@ -57,14 +70,10 @@ const CriteriaForm = (props: Props) => {
           })
       ))
         .then((result) => {
-          console.log('ok');
+          toast.success('Tải tài liệu thành công.');
         })
         .catch(() => {
-          // notifications.showNotification({
-          //   color: 'red',
-          //   title: 'Lỗi hệ thống',
-          //   message: 'Đã xảy ra lỗi trong quá trình tải tập tin, vui lòng thử lại sau.',
-          // });
+          toast.error('Đã có lỗi xảy ra trong quá trình tải tài liệu. Vui lòng thử lại sau.');
         });
     }
   };
