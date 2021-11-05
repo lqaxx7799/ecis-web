@@ -26,8 +26,52 @@ function getReport(month: number, year: number): AppThunk<Promise<CompanyTypeMod
   };
 }
 
+function getByCompanyId(companyId: number): AppThunk<Promise<CompanyTypeModification[]>> {
+  return async (dispatch: AppDispatch) => {
+    dispatch<CompanyTypeModificationActionTypes>({
+      type: 'COMPANY_TYPE_MODIFICATION_LOADING',
+    });
+    try {
+      const result = await companyTypeModificationServices.getByCompanyId(companyId);
+      dispatch<CompanyTypeModificationActionTypes>({
+        type: 'COMPANY_TYPE_MODIFICATION_LOADED',
+        payload: result,
+      });
+      return result;
+    } catch (e) {
+      dispatch<CompanyTypeModificationActionTypes>({
+        type: 'COMPANY_TYPE_MODIFICATION_LOAD_FAILED',
+      });
+      return [];
+    }
+  };
+}
+
+function getById(id: number): AppThunk<Promise<CompanyTypeModification>> {
+  return async (dispatch: AppDispatch) => {
+    dispatch<CompanyTypeModificationActionTypes>({
+      type: 'COMPANY_TYPE_MODIFICATION_LOADING',
+    });
+    try {
+      const result = await companyTypeModificationServices.getById(id);
+      dispatch<CompanyTypeModificationActionTypes>({
+        type: 'COMPANY_TYPE_MODIFICATION_DETAIL_LOADED',
+        payload: result,
+      });
+      return result;
+    } catch (e) {
+      dispatch<CompanyTypeModificationActionTypes>({
+        type: 'COMPANY_TYPE_MODIFICATION_LOAD_FAILED',
+      });
+      throw e;
+    }
+  };
+}
+
 const companyTypeModificationActions = {
   getReport,
+  getByCompanyId,
+  getById,
 };
 
 export default companyTypeModificationActions;

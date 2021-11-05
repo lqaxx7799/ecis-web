@@ -113,6 +113,7 @@ const MainLayout = ({ children, isBleedLayout }: Props) => {
                         style={{ display: activeSideItem === 'info' ? 'block' : 'none' }}
                       >
                         <li><Link to="/company-profile">Cập nhật thông tin liên hệ</Link></li>
+                        <li><Link to="/modification-history">Quá trình phân loại</Link></li>
                       </ul>
                     </li>
                     <li

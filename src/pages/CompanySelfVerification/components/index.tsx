@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
+import Modal from "react-responsive-modal";
 import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
 import companySelfVerificationActions from "../action";
@@ -17,6 +18,7 @@ const CompanySelfVerification = (props: Props) => {
   } = useAppSelector((state) => state.companySelfVerification);
   const { criteriaTypes } = useAppSelector((state) => state.criteriaType);
 
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [selectedTabId, setSelectedTabId] = useState(-1);
 
   useEffect(() => {
@@ -30,9 +32,11 @@ const CompanySelfVerification = (props: Props) => {
     dispatch(companySelfVerificationActions.submitVerificationProcess(editingProcess?.id ?? 0))
       .then(() => {
         toast.success('Gửi đánh giá thành công.');
+        setShowConfirmModal(false);
       })
       .catch(() => {
         toast.error('Đã có lỗi xảy ra trong quá trình gửi đánh giá. Vui lòng thử lại sau.');
+        setShowConfirmModal(false);
       });
   };
 
@@ -67,6 +71,7 @@ const CompanySelfVerification = (props: Props) => {
           {
             _.map(criteriaTypes, (type) => (
               <CriteriaListTab
+                key={type.id}
                 criteriaTypeId={type.id}
                 isSelected={selectedTabId === type.id}
               />
@@ -74,7 +79,7 @@ const CompanySelfVerification = (props: Props) => {
           }
         </div>
         <div style={{ marginTop: '24px' }}>
-          <button onClick={submitVerification}>Gửi lên</button>
+          <button onClick={() => setShowConfirmModal(true)}>Gửi lên</button>
         </div>
       </div>
     </>
@@ -93,6 +98,33 @@ const CompanySelfVerification = (props: Props) => {
             : mainBody
         }
       </div>
+
+      <Modal
+        styles={{ modal: { width: '400px' } }}
+        open={showConfirmModal} 
+        onClose={() => setShowConfirmModal(false)}
+      >
+        <div>
+          <h3>Xác nhận gửi đánh giá</h3>
+        </div>
+        <div>
+          Bạn có chắc chắn gửi đánh giá lên cho cục kiểm lâm?
+        </div>
+        <div style={{ marginTop: '12px' }}>
+          <button
+            className="btn btn-primary"
+            onClick={submitVerification}
+          >
+            Xác nhận
+          </button>
+          <button
+            className="btn btn-default"
+            onClick={() => setShowConfirmModal(false)}
+          >
+            Hủy
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };
