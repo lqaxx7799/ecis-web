@@ -4,6 +4,7 @@ import { CompanyTypeModification } from '../../types/models';
 import { CompanyTypeModificationActionTypes } from '../reducers/companyTypeModification.reducer';
 import companyTypeModificationServices from '../services/companyTypeModification.services';
 import { AppThunk } from './type';
+import verificationProcessActions from './verificationProcess.action';
 
 function getReport(month: number, year: number): AppThunk<Promise<CompanyTypeModification[]>> {
   return async (dispatch: AppDispatch) => {
@@ -54,6 +55,9 @@ function getById(id: number): AppThunk<Promise<CompanyTypeModification>> {
     });
     try {
       const result = await companyTypeModificationServices.getById(id);
+      if (result.modification === 'VERIFICATION') {
+        dispatch(verificationProcessActions.loadVerificationDetail(result.verificationProcessId));
+      }
       dispatch<CompanyTypeModificationActionTypes>({
         type: 'COMPANY_TYPE_MODIFICATION_DETAIL_LOADED',
         payload: result,

@@ -25,6 +25,7 @@ const ModificationHistory = (props: Props) => {
     {
       name: 'STT',
       selector: (row, index) => index + 1,
+      width: '50px',
     },
     {
       name: 'Thời gian hoàn thành',
@@ -34,10 +35,11 @@ const ModificationHistory = (props: Props) => {
     {
       name: 'Loại',
       selector: (row) => MODIFICATION_TYPE[row.modification] ?? '-',
+      width: '100px',
     },
     {
       name: 'Kết quả phân loại',
-      selector: (row) => `Chuyển từ ${row.previousCompanyType?.typeName} sang ${row.updatedCompanyType?.typeName}`,
+      selector: (row) => `Chuyển từ ${row.previousCompanyType?.typeName ?? 'Chưa đánh giá'} sang ${row.updatedCompanyType?.typeName ?? 'Chưa đánh giá'}`,
     },
     {
       name: 'Thao tác',
@@ -52,7 +54,7 @@ const ModificationHistory = (props: Props) => {
   return (
     <div className="x_panel">
       <div className="x_title">
-        <h2>Doanh nghiệp tự đánh giá</h2>
+        <h2>Quá trình phân loại</h2>
         <div className="clearfix" />
       </div>
       <div className="x_content">

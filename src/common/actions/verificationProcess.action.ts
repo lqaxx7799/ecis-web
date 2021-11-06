@@ -6,6 +6,7 @@ import verificationDocumentServices from '../services/verificationDocument.servi
 import verificationProcessServices from '../services/verificationProcess.services';
 import companyTypeActions from './companyType.action';
 import criteriaActions from './criteria.action';
+import criteriaDetailActions from './criteriaDetail.action';
 import criteriaTypeActions from './criteriaType.action';
 import { AppThunk } from './type';
 
@@ -42,6 +43,7 @@ function loadVerificationDetail(processId: number): AppThunk<Promise<Verificatio
         verificationDocumentServices.getAllByProcessId(processId),
         dispatch(criteriaActions.getAll()),
         dispatch(criteriaTypeActions.getAll()),
+        dispatch(criteriaDetailActions.getAll()),
         dispatch(companyTypeActions.getAll()),
       ]);
       dispatch<VerificationProcessActionTypes>({

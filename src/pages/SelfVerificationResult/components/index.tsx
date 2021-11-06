@@ -25,16 +25,6 @@ const SelfVerificationResult = (props: Props) => {
       });
   }, [dispatch]);
 
-  const submitVerification = () => {
-    dispatch(companySelfVerificationActions.submitVerificationProcess(editingProcess?.id ?? 0))
-      .then(() => {
-        console.log('ok');
-      })
-      .catch(() => {
-        console.log('no')
-      });
-  };
-
   const noData = (
     <div>
       Hiện tại doanh nghiệp không cần phải đánh giá.
