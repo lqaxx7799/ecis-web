@@ -22,6 +22,7 @@ import SelfVerificationResult from '../pages/SelfVerificationResult/components';
 import NotFound from '../pages/NotFound/components';
 import { ToastContainer } from 'react-toastify';
 import ModificationHistory from '../pages/ModificationHistory/components';
+import ModificationDetail from '../pages/ModificationHistory/components/ModificationDetail';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -41,6 +42,7 @@ const App = () => {
         <AppRoute path='/login' component={LogIn} layout={BlankLayout} />
         <AppRoute path="/company-self-verification" component={CompanySelfVerification} layout={MainLayout} needAuth roles={["Company"]} />
         <AppRoute path="/verification-result" component={SelfVerificationResult} layout={MainLayout} needAuth roles={["Company"]} />
+        <AppRoute path="/modification-history/:id" component={ModificationDetail} layout={MainLayout} needAuth roles={["Company"]} />
         <AppRoute path="/modification-history" component={ModificationHistory} layout={MainLayout} needAuth roles={["Company"]} />
 
         <AppRoute path='/dang-ky-doanh-nghiep' component={CompanyRegistration} layout={MainLayout} />
