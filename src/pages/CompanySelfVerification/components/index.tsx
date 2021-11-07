@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import Modal from "react-responsive-modal";
 import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
@@ -87,6 +88,9 @@ const CompanySelfVerification = (props: Props) => {
 
   return (
     <div className="x_panel">
+      <Helmet>
+        <title>Doanh nghiệp tự đánh giá</title>
+      </Helmet>
       <div className="x_title">
         <h2>Doanh nghiệp tự đánh giá</h2>
         <div className="clearfix" />

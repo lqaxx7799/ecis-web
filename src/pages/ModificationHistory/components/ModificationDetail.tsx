@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
@@ -61,6 +62,9 @@ const ModificationDetail = (props: Props) => {
 
   return (
     <div className="x_panel">
+      <Helmet>
+        <title>Chi tiết quá trình đánh giá</title>
+      </Helmet>
       <div className="x_title">
         <h2>Chi tiết quá trình đánh giá</h2>
         <div className="clearfix" />

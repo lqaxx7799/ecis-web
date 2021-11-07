@@ -1,5 +1,6 @@
 import { Button, Col, Grid, PasswordInput, TextInput, Title } from "@mantine/core";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { useForm, Controller } from "react-hook-form";
 import { useHistory } from "react-router";
 
@@ -36,6 +37,9 @@ const LogIn = () => {
 
   return (
     <div className="login" style={{ backgroundImage: 'url(/images/bg1.jpg)' , backgroundSize: 'cover', height: '100vh' }}>
+      <Helmet>
+        <title>Đăng nhập</title>
+      </Helmet>
       <div style={{ background: 'rgba(0,0,0,0.5)', position: 'absolute', width: '100%', height: '100vh' }}>
         <a className="hiddenanchor" id="signup"></a>
         <a className="hiddenanchor" id="signin"></a>

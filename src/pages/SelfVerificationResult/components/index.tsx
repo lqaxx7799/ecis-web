@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
 import companySelfVerificationActions from "../../CompanySelfVerification/action";
 import CriteriaListTab from "./CriteriaListTab";
@@ -68,6 +69,9 @@ const SelfVerificationResult = (props: Props) => {
 
   return (
     <div className="x_panel">
+      <Helmet>
+        <title>Kết quả xác minh đánh giá</title>
+      </Helmet>
       <div className="x_title">
         <h2>Kết quả xác minh đánh giá</h2>
         <div className="clearfix" />

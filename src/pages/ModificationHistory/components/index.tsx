@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { useEffect } from "react";
 import DataTable, { IDataTableColumn } from "react-data-table-component";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
 import companyTypeModificationActions from "../../../common/actions/companyTypeModification.action";
@@ -31,11 +32,12 @@ const ModificationHistory = (props: Props) => {
       name: 'Thời gian hoàn thành',
       selector: 'createdAt',
       format: (row) => dayjs(row.createdAt).format('DD/MM/YYYY'),
+      width: '150px',
     },
     {
       name: 'Loại',
       selector: (row) => MODIFICATION_TYPE[row.modification] ?? '-',
-      width: '100px',
+      width: '150px',
     },
     {
       name: 'Kết quả phân loại',
@@ -53,6 +55,9 @@ const ModificationHistory = (props: Props) => {
 
   return (
     <div className="x_panel">
+      <Helmet>
+        <title>Quá trình phân loại</title>
+      </Helmet>
       <div className="x_title">
         <h2>Quá trình phân loại</h2>
         <div className="clearfix" />
