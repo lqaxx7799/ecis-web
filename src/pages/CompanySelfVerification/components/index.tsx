@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import Modal from "react-responsive-modal";
 import { toast } from "react-toastify";
+import Popup from 'reactjs-popup';
 import { useAppDispatch, useAppSelector } from "../../../app/store";
 import companySelfVerificationActions from "../action";
 import CriteriaListTab from "./CriteriaListTab";
@@ -80,7 +81,18 @@ const CompanySelfVerification = (props: Props) => {
           }
         </div>
         <div style={{ marginTop: '24px' }}>
-          <button onClick={() => setShowConfirmModal(true)}>Gửi lên</button>
+          {
+            editingProcess?.isSubmitted ? (
+              <Popup
+                trigger={<span><button className="btn btn-primary" disabled>Gửi lên</button></span>}
+                on={['hover']}
+              >
+                Đánh giá đã được gửi
+              </Popup>
+            ) : (
+              <button className="btn btn-primary" onClick={() => setShowConfirmModal(true)}>Gửi lên</button>
+            )
+          }
         </div>
       </div>
     </>
