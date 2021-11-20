@@ -97,7 +97,7 @@ const MainLayout = ({ children, isBleedLayout }: Props) => {
                       >                  
                         <li><Link to="/company-self-verification">Tự đánh giá</Link></li>
                         <li><Link to="/verification-result">Kết quả xác minh đánh giá</Link></li>
-                        <li><Link to="/verification-report">Khiếu nại kết quả</Link></li>
+                        <li><Link to="/request-verification">Yêu cầu đánh giá trước thời hạn</Link></li>
                       </ul>
                     </li>
                     <li
