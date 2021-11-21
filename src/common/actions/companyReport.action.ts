@@ -4,6 +4,12 @@ import { CompanyReport } from '../../types/models';
 import companyReportServices from '../services/companyReport.services';
 import { AppThunk } from './type';
 
+function getCurrentUnhandled(companyId: number): AppThunk<Promise<CompanyReport>> {
+  return (dispatch: AppDispatch) => {
+    return companyReportServices.getCurrentUnhandled(companyId);
+  };
+}
+
 function create(payload: CompanyReportDTO): AppThunk<Promise<CompanyReport>> {
   return (dispatch: AppDispatch) => {
     return companyReportServices.create(payload);
@@ -11,6 +17,7 @@ function create(payload: CompanyReportDTO): AppThunk<Promise<CompanyReport>> {
 }
 
 const companyReportActions = {
+  getCurrentUnhandled, 
   create,
 };
 

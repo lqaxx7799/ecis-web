@@ -1,6 +1,6 @@
 import { FileIcon, TrashIcon } from "@radix-ui/react-icons";
 import _ from "lodash";
-import { ChangeEvent, useRef } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/store";
 import companyReportActions from "../../../common/actions/companyReport.action";
 import fileServices from "../../../common/services/file.services";
 import { CompanyReportDTO } from "../../../types/dto";
-import { CompanyReportDocument } from "../../../types/models";
+import { CompanyReport, CompanyReportDocument } from "../../../types/models";
 
 type Props = {
 
@@ -26,8 +26,16 @@ const RequestVerification = (props: Props) => {
   const dispatch = useAppDispatch();
 
   const { company } = useAppSelector((state) => state.authentication);
+  const [currentReport, setCurrentReport] = useState<CompanyReport | undefined>(undefined);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    dispatch(companyReportActions.getCurrentUnhandled(company?.id ?? 0))
+      .then((res) => {
+        setCurrentReport(res);
+      });
+  }, [dispatch, company]);
 
   const {
     control,
@@ -84,6 +92,28 @@ const RequestVerification = (props: Props) => {
         toast.error('Đã xảy ra lỗi trong quá trình gửi yêu cầu. Vui lòng thử lại sau.');
       });
   };
+
+  if (currentReport) {
+    return (
+      <div className="row">
+        <Helmet>
+          <title>Yêu cầu đánh giá trước thời hạn</title>
+        </Helmet>
+        <div className="x_panel">
+          <div className="x_title">
+            <h2>Yêu cầu đánh giá trước thời hạn</h2>
+            <div className="clearfix"></div>
+          </div>
+          <div className="x_content">
+            <div className="clearfix"></div>
+            <div className="col-xs-12 table">
+              Doanh nghiệp đã có yêu cầu đánh giá trước thời hạn chưa được duyệt. Vui lòng đợi hệ thống xử lý yêu cầu trước khi tạo yêu cầu mới.
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="row">
