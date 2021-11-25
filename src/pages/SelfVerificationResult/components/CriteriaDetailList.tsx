@@ -37,7 +37,7 @@ const CriteriaDetailList = (props: Props) => {
         if (!currentCriteria) {
           return null;
         }
-        return currentCriteria.approvedStatus === 'APPROVED' ? (
+        return currentCriteria.approvedStatus === 'VERIFIED' ? (
           <>
             <i className="fa fa-thumbs-up" aria-hidden="true" /> Đạt
           </>
