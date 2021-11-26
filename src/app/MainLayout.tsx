@@ -1,5 +1,3 @@
-import { Button, Container, Divider, Menu, MenuItem, MenuLabel, Text, Title } from '@mantine/core';
-import { PersonIcon, PinLeftIcon, TriangleDownIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import authenticationActions from '../common/actions/authentication.actions';
@@ -116,7 +114,7 @@ const MainLayout = ({ children, isBleedLayout }: Props) => {
                         <li><Link to="/modification-history">Quá trình phân loại</Link></li>
                       </ul>
                     </li>
-                    <li
+                    {/* <li
                       key="relationship"
                       className={`${activeSideItem === 'relationship' ? 'active' : ''}`}
                       onClick={() => onSidebarClick('relationship')}
@@ -131,7 +129,7 @@ const MainLayout = ({ children, isBleedLayout }: Props) => {
                         <li><Link to="/suppliers">Nhà cung cấp</Link></li>
                         <li><Link to="/clients">Khánh hàng</Link></li>
                       </ul>
-                    </li>                  
+                    </li> */}
                   </ul>
                 </div>              
               </div>

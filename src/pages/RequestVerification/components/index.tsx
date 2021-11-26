@@ -26,14 +26,14 @@ const RequestVerification = (props: Props) => {
   const dispatch = useAppDispatch();
 
   const { company } = useAppSelector((state) => state.authentication);
-  const [currentReport, setCurrentReport] = useState<CompanyReport | undefined>(undefined);
+  const [canCreate, setCanCreate] = useState<boolean>(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    dispatch(companyReportActions.getCurrentUnhandled(company?.id ?? 0))
+    dispatch(companyReportActions.canCreateReport(company?.id ?? 0))
       .then((res) => {
-        setCurrentReport(res);
+        setCanCreate(res);
       });
   }, [dispatch, company]);
 
@@ -93,7 +93,7 @@ const RequestVerification = (props: Props) => {
       });
   };
 
-  if (currentReport) {
+  if (!canCreate) {
     return (
       <div className="row">
         <Helmet>
@@ -107,7 +107,8 @@ const RequestVerification = (props: Props) => {
           <div className="x_content">
             <div className="clearfix"></div>
             <div className="col-xs-12 table">
-              Doanh nghiệp đã có yêu cầu đánh giá trước thời hạn chưa được duyệt. Vui lòng đợi hệ thống xử lý yêu cầu trước khi tạo yêu cầu mới.
+              Doanh nghiệp đã có yêu cầu đánh giá trước thời hạn chưa được duyệt hoặc đang trong quá trình đánh giá.
+              Vui lòng đợi hệ thống xử lý yêu cầu trước khi tạo yêu cầu mới.
             </div>
           </div>
         </div>

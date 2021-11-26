@@ -2,8 +2,8 @@ import { CompanyReportDTO } from '../../types/dto';
 import { CompanyReport } from '../../types/models';
 import request from '../utils/request';
 
-function getCurrentUnhandled(companyId: number): Promise<CompanyReport> {
-  return request.get(`/CompanyReport/CurrentUnhandled/${companyId}`);
+function canCreateReport(companyId: number): Promise<boolean> {
+  return request.get(`/CompanyReport/CanCreateReport/${companyId}`);
 }
 
 function create(data: CompanyReportDTO): Promise<CompanyReport> {
@@ -11,7 +11,7 @@ function create(data: CompanyReportDTO): Promise<CompanyReport> {
 }
 
 const companyReportServices = {
-  getCurrentUnhandled,
+  canCreateReport,
   create,
 };
 
