@@ -2,6 +2,7 @@ import _ from "lodash";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import Modal from "react-responsive-modal";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import Popup from 'reactjs-popup';
 import { useAppDispatch, useAppSelector } from "../../../app/store";
@@ -45,7 +46,7 @@ const CompanySelfVerification = (props: Props) => {
   const noData = (
     <div>
       Hiện tại doanh nghiệp không cần phải đánh giá.
-      Yêu cầu đánh giá tại đây.
+      Yêu cầu đánh giá <Link to="/request-verification">tại đây</Link>.
     </div>
   );
 

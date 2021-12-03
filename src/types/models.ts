@@ -65,6 +65,7 @@ export interface VerificationProcess extends BaseModel {
   isOpenedByAgent: boolean;
   isSubmitted: boolean;
   isReviewed: boolean;
+  status: string;
   submitMethod: string;
   companyTypeId?: number;
   assignedAgentId?: number;
@@ -76,7 +77,7 @@ export interface VerificationCriteria extends BaseModel {
   id: number;
   approvedStatus?: string;
   companyOpinion: string;
-  companyRate?: boolean;
+  companyRate?: boolean | null;
   reviewResult: string;
   reviewComment: string;
   verificationProcessId?: number;

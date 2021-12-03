@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
 import companySelfVerificationActions from "../../CompanySelfVerification/action";
 import CriteriaListTab from "./CriteriaListTab";
@@ -66,6 +67,23 @@ const SelfVerificationResult = (props: Props) => {
       </div>
     </>
   );
+
+  if (editingProcess?.status === 'IN_PROGRESS') {
+    return (
+      <div className="x_panel">
+        <Helmet>
+          <title>Kết quả xác minh đánh giá</title>
+        </Helmet>
+        <div className="x_title">
+          <h2>Kết quả xác minh đánh giá</h2>
+          <div className="clearfix" />
+        </div>
+        <div className="x_content">
+          Doanh nghiệp chưa gửi cho kiểm lâm đánh giá. Vui lòng hoàn thành đánh giá <Link to="/company-self-verification">tại đây</Link>.
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="x_panel">

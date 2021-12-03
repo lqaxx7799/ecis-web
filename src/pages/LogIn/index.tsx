@@ -97,12 +97,12 @@ const LogIn = () => {
                 <div className="clearfix"></div>
 
                 <div className="separator">
-                  <p className="change_link">Chưa có tài khoản ?
+                  {/* <p className="change_link">Chưa có tài khoản ?
                     <a href="#signup" className="to_register"> Tạo mới </a>
                   </p>
 
                   <div className="clearfix"></div>
-                  <br />
+                  <br /> */}
 
                   <div>
                     <p>©2020</p>

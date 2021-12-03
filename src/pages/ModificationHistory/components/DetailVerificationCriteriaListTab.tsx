@@ -44,6 +44,7 @@ const DetailVerificationCriteriaListTab = (props: Props) => {
         data={filteredCriterias}
         expandableRows
         expandableRowsComponent={<DetailVerificationCriteriaDetailList />}
+        className="verification-table"
       />
     </div>
   );

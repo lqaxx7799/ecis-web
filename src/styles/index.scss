@@ -81,8 +81,8 @@ body {
 
 .inline-radio-group {
   display: flex;
-  align-items: center;
   margin-bottom: 8px;
+  flex-direction: column;
   input[type=radio] {
     margin-top: 0px;
     margin-left: 4px;
@@ -91,6 +91,11 @@ body {
   label {
     margin-bottom: 0px;
   }
+}
+
+.verification-table {
+  height: calc(100vh - 300px);
+  overflow: auto !important;
 }
 
 /* width */
