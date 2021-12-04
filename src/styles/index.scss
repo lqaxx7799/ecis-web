@@ -94,7 +94,17 @@ body {
 }
 
 .verification-table {
-  height: calc(100vh - 300px);
+  height: calc(100vh - 240px);
+  overflow: auto !important;
+}
+
+.result-verification-table {
+  height: calc(100vh - 180px);
+  overflow: auto !important;
+}
+
+.history-verification-table {
+  height: calc(100vh - 226px);
   overflow: auto !important;
 }
 
