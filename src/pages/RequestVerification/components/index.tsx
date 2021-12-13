@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
 import companyReportActions from "../../../common/actions/companyReport.action";
 import fileServices from "../../../common/services/file.services";
+import helpers from "../../../common/utils/helpers";
 import { CompanyReportDTO } from "../../../types/dto";
 import { CompanyReport, CompanyReportDocument } from "../../../types/models";
 
@@ -60,6 +61,12 @@ const RequestVerification = (props: Props) => {
   const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
     const { files } = e.target;
     if (files?.length) {
+      const validation = helpers.validateUploadedFiles(files);
+      if (validation) {
+        toast.error(validation);
+        return;
+      }
+
       Promise.all(Array.from(files).map((file) => fileServices.uploadFile(file)))
         .then((result) => {
           _.forEach(result, (item) => {
