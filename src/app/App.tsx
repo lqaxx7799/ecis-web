@@ -24,6 +24,7 @@ import { ToastContainer } from 'react-toastify';
 import ModificationHistory from '../pages/ModificationHistory/components';
 import ModificationDetail from '../pages/ModificationHistory/components/ModificationDetail';
 import RequestVerification from '../pages/RequestVerification/components';
+import ChangePassword from '../pages/ChangePassword/components';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -47,12 +48,14 @@ const App = () => {
         <AppRoute path="/modification-history" component={ModificationHistory} layout={MainLayout} needAuth roles={["Company"]} />
         <AppRoute path="/request-verification" component={RequestVerification} layout={MainLayout} needAuth roles={["Company"]} />
 
-        <AppRoute path='/dang-ky-doanh-nghiep' component={CompanyRegistration} layout={MainLayout} />
-        <AppRoute path='/dang-ky-thanh-cong' component={RegistrationSuccess} layout={MainLayout} />
-        {/* <AppRoute path='/dang-nhap' component={LogIn} layout={MainLayout} /> */}
+        <AppRoute path="/change-password" component={ChangePassword} layout={MainLayout} needAuth roles={["Company"]} />
 
+        {/* <AppRoute path='/dang-ky-doanh-nghiep' component={CompanyRegistration} layout={MainLayout} />
+        <AppRoute path='/dang-ky-thanh-cong' component={RegistrationSuccess} layout={MainLayout} /> */}
+        {/* <AppRoute path='/dang-nhap' component={LogIn} layout={MainLayout} /> */}
+{/* 
         <AppRoute path='/ket-qua-danh-gia/:id' component={VerificationResultDetail} layout={MainLayout} />
-        <AppRoute path='/ket-qua-danh-gia' component={VerificationResult} layout={MainLayout} />
+        <AppRoute path='/ket-qua-danh-gia' component={VerificationResult} layout={MainLayout} /> */}
 
         {/* <AppRoute path="/doanh-nghiep/yeu-cau-tu-danh-gia" component={RequestVerification} layout={CompanyLayout} needAuth roles={["Company"]} /> */}
         {/* <AppRoute path="/doanh-nghiep/tu-danh-gia/chi-tiet/:id" component={CompanyDetailVerification} layout={CompanyLayout} needAuth roles={["Company"]} />

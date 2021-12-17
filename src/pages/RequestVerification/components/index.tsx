@@ -28,6 +28,7 @@ const RequestVerification = (props: Props) => {
 
   const { company } = useAppSelector((state) => state.authentication);
   const [canCreate, setCanCreate] = useState<boolean>(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -90,13 +91,16 @@ const RequestVerification = (props: Props) => {
       targetedCompanyId: company?.id ?? 0,
       creatorCompanyId: company?.id ?? 0,
     };
+    setSubmitting(true);
     dispatch(companyReportActions.create(formattedData))
       .then(() => {
-        toast.success('Gửi yêu cầu thành công. Khi yêu cầu được xử lý, kết quả sẽ được gửi vào email của bạn');
+        toast.success('Gửi yêu cầu thành công. Khi yêu cầu được xử lý, kết quả sẽ được gửi vào email của bạn.');
         reset();
+        setSubmitting(false);
       })
       .catch(() => {
         toast.error('Đã xảy ra lỗi trong quá trình gửi yêu cầu. Vui lòng thử lại sau.');
+        setSubmitting(false);
       });
   };
 
@@ -217,7 +221,7 @@ const RequestVerification = (props: Props) => {
               <div className="form-group">
                 <div className="col-md-6 col-md-offset-3">
                   <button type="button" onClick={resetForm} className="btn btn-primary">Hủy bỏ</button>
-                  <button type="submit" className="btn btn-success">Thực hiện</button>
+                  <button type="submit" className="btn btn-success" disabled={submitting}>Thực hiện</button>
                 </div>
             </div>
             </form>

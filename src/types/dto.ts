@@ -26,3 +26,9 @@ export interface CompanyReportDTO {
   creatorCompanyId: number; 
   companyReportDocuments: Partial<CompanyReportDocument>[];
 };
+
+export interface ChangePasswordDTO {
+  oldPassword: string;
+  newPassword: string;
+  reenterNewPassword: string;
+};
