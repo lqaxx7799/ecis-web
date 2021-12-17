@@ -97,6 +97,7 @@ const RequestVerification = (props: Props) => {
         toast.success('Gửi yêu cầu thành công. Khi yêu cầu được xử lý, kết quả sẽ được gửi vào email của bạn.');
         reset();
         setSubmitting(false);
+        setCanCreate(false);
       })
       .catch(() => {
         toast.error('Đã xảy ra lỗi trong quá trình gửi yêu cầu. Vui lòng thử lại sau.');
