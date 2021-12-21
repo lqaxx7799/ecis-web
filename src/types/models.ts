@@ -184,3 +184,13 @@ export interface CompanyReportDocument extends BaseModel {
   documentSize: number;
   companyReportId: number;
 };
+
+export interface ThirdParty extends BaseModel {
+  id: number;
+  userName: string;
+  clientId: string;
+  clientSecret: string;
+  isActive: string;
+  accountId: number;
+  account: Account;
+};

@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
 import companyTypeModificationActions from "../../../common/actions/companyTypeModification.action";
@@ -26,6 +26,8 @@ const ModificationDetail = (props: Props) => {
   useEffect(() => {
     dispatch(companyTypeModificationActions.getById(parseInt(modificationId)));
   }, [dispatch, modificationId]);
+
+  const backPath = useLocation().pathname.includes('modification-report') ? '/modification-report' : '/modification-history';
 
   const mainBody = (
     <div>
@@ -70,7 +72,7 @@ const ModificationDetail = (props: Props) => {
         <div className="clearfix" />
       </div>
       <div className="x_breadcrumb">
-        <Link className="btn btn-default" to="/modification-history">Quay lại</Link>
+        <Link className="btn btn-default" to={backPath}>Quay lại</Link>
       </div>
       <div className="x_content">
         {

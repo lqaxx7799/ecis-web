@@ -25,6 +25,9 @@ import ModificationHistory from '../pages/ModificationHistory/components';
 import ModificationDetail from '../pages/ModificationHistory/components/ModificationDetail';
 import RequestVerification from '../pages/RequestVerification/components';
 import ChangePassword from '../pages/ChangePassword/components';
+import ModificationReport from '../pages/ModificationHistory/components/ModificationReport';
+import ApiInfo from '../pages/ThirdPartyApi/components/ApiInfo';
+import ApiDocumentation from '../pages/ThirdPartyApi/components/ApiDocumentation';
 
 const App = () => {
   const dispatch = useAppDispatch();
@@ -48,7 +51,7 @@ const App = () => {
         <AppRoute path="/modification-history" component={ModificationHistory} layout={MainLayout} needAuth roles={["Company"]} />
         <AppRoute path="/request-verification" component={RequestVerification} layout={MainLayout} needAuth roles={["Company"]} />
 
-        <AppRoute path="/change-password" component={ChangePassword} layout={MainLayout} needAuth roles={["Company"]} />
+        <AppRoute path="/change-password" component={ChangePassword} layout={MainLayout} needAuth roles={["Company", "ThirdParty"]} />
 
         {/* <AppRoute path='/dang-ky-doanh-nghiep' component={CompanyRegistration} layout={MainLayout} />
         <AppRoute path='/dang-ky-thanh-cong' component={RegistrationSuccess} layout={MainLayout} /> */}
@@ -63,8 +66,14 @@ const App = () => {
         {/* <AppRoute path="/doanh-nghiep/tu-danh-gia" component={CompanySelfVerification} layout={CompanyLayout} needAuth roles={["Company"]} /> */}
         {/* <AppRoute path="/doanh-nghiep" component={CompanyDashboard} layout={CompanyLayout} needAuth roles={["Company"]} /> */}
 
-        <AppRoute exact path='/' component={Dashboard} layout={MainLayout} needAuth roles={["Company"]} />
-        <AppRoute component={NotFound} layout={MainLayout} needAuth roles={["Company"]} />
+        <AppRoute path="/modification-report/:id" component={ModificationDetail} layout={MainLayout} needAuth roles={["ThirdParty"]} />
+        <AppRoute path="/modification-report" component={ModificationReport} layout={MainLayout} needAuth roles={["ThirdParty"]} />
+        
+        <AppRoute path="/api-info" component={ApiInfo} layout={MainLayout} needAuth roles={["ThirdParty"]} />
+        <AppRoute path="/api-documentation" component={ApiDocumentation} layout={MainLayout} needAuth roles={["ThirdParty"]} />
+
+        <AppRoute exact path='/' component={Dashboard} layout={MainLayout} needAuth roles={["Company", "ThirdParty"]} />
+        <AppRoute component={NotFound} layout={MainLayout} needAuth roles={["Company", "ThirdParty"]} />
       </Switch>
       <ToastContainer />
     </>

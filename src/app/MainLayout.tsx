@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import authenticationActions from '../common/actions/authentication.actions';
@@ -32,6 +33,8 @@ const MainLayout = ({ children, isBleedLayout }: Props) => {
     dispatch(authenticationActions.logOut());
   };
 
+  const isCompany = _.get(authentication, 'role.roleName') === 'Company';
+
   return (
     <div className={isSideBarOpen ? 'nav-md' : 'nav-sm'}>
       <div className="container body">
@@ -40,8 +43,19 @@ const MainLayout = ({ children, isBleedLayout }: Props) => {
             <div className="left_col scroll-view">
               <div className="navbar nav_title" style={{ border: 0 }}>
                 <Link to="/" className="site_title">
-                  <img src="/images/fpd_logo_small.png" alt="" />
-                  <span>{authentication.company?.companyNameVI}</span>
+                  {
+                    authentication.role?.roleName === 'Company' ? (
+                      <>
+                        <img src="/images/fpd_logo_small.png" alt="" />
+                        <span>{authentication.company?.companyNameVI}</span>
+                      </>
+                    ) : (
+                      <>
+                        <img src="/images/fpd_logo_small.png" alt="" />
+                        <span>{authentication.thirdParty?.userName}</span>
+                      </>
+                    )
+                  }
                 </Link>
               </div>
 
@@ -81,55 +95,86 @@ const MainLayout = ({ children, isBleedLayout }: Props) => {
                         <li><Link to="/">Dashboard</Link></li>
                       </ul>
                     </li>
-                    <li
-                      key="review"
-                      className={`${activeSideItem === 'review' ? 'active' : ''}`}
-                      onClick={() => onSidebarClick('review')}
-                    >
-                      <a>
-                        <i className="fa fa-edit"></i> Đánh giá, Phân loại<span className="fa fa-chevron-down" />
-                      </a>
-                      <ul
-                        className="nav child_menu"
-                        style={{ display: activeSideItem === 'review' ? 'block' : 'none' }}
-                      >                  
-                        <li><Link to="/company-self-verification">Tự đánh giá</Link></li>
-                        <li><Link to="/verification-result">Kết quả xác minh đánh giá</Link></li>
-                        <li><Link to="/request-verification">Yêu cầu đánh giá trước thời hạn</Link></li>
-                      </ul>
-                    </li>
-                    <li
-                      key="info"
-                      className={`${activeSideItem === 'info' ? 'active' : ''}`}
-                      onClick={() => onSidebarClick('info')}
-                    >
-                      <a>
-                        <i className="fa fa-edit"></i> Thông tin Doanh Nghiệp<span className="fa fa-chevron-down" />
-                      </a>
-                      <ul
-                        className="nav child_menu"
-                        style={{ display: activeSideItem === 'info' ? 'block' : 'none' }}
-                      >
-                        <li><Link to="/company-profile">Cập nhật thông tin liên hệ</Link></li>
-                        <li><Link to="/modification-history">Quá trình phân loại</Link></li>
-                      </ul>
-                    </li>
-                    {/* <li
-                      key="relationship"
-                      className={`${activeSideItem === 'relationship' ? 'active' : ''}`}
-                      onClick={() => onSidebarClick('relationship')}
-                    >
-                      <a>
-                        <i className="fa fa-desktop"></i> Quan hệ kinh doanh <span className="fa fa-chevron-down"/>
-                      </a>
-                      <ul
-                        className="nav child_menu"
-                        style={{ display: activeSideItem === 'relationship' ? 'block' : 'none' }}
-                      >
-                        <li><Link to="/suppliers">Nhà cung cấp</Link></li>
-                        <li><Link to="/clients">Khánh hàng</Link></li>
-                      </ul>
-                    </li> */}
+                    {
+                      isCompany && (
+                        <li
+                          key="review"
+                          className={`${activeSideItem === 'review' ? 'active' : ''}`}
+                          onClick={() => onSidebarClick('review')}
+                        >
+                          <a>
+                            <i className="fa fa-edit"></i> Đánh giá, Phân loại<span className="fa fa-chevron-down" />
+                          </a>
+                          <ul
+                            className="nav child_menu"
+                            style={{ display: activeSideItem === 'review' ? 'block' : 'none' }}
+                          >                  
+                            <li><Link to="/company-self-verification">Tự đánh giá</Link></li>
+                            <li><Link to="/verification-result">Kết quả xác minh đánh giá</Link></li>
+                            <li><Link to="/request-verification">Yêu cầu đánh giá trước thời hạn</Link></li>
+                          </ul>
+                        </li>
+                      )
+                    }
+                    {
+                      isCompany && (
+                        <li
+                          key="info"
+                          className={`${activeSideItem === 'info' ? 'active' : ''}`}
+                          onClick={() => onSidebarClick('info')}
+                        >
+                          <a>
+                            <i className="fa fa-edit"></i> Thông tin Doanh Nghiệp<span className="fa fa-chevron-down" />
+                          </a>
+                          <ul
+                            className="nav child_menu"
+                            style={{ display: activeSideItem === 'info' ? 'block' : 'none' }}
+                          >
+                            <li><Link to="/company-profile">Cập nhật thông tin liên hệ</Link></li>
+                            <li><Link to="/modification-history">Quá trình phân loại</Link></li>
+                          </ul>
+                        </li>
+                      )
+                    }
+                    {
+                      !isCompany && (
+                        <li
+                          key="thirdParty"
+                          className={`${activeSideItem === 'thirdParty' ? 'active' : ''}`}
+                          onClick={() => onSidebarClick('thirdParty')}
+                        >
+                          <a>
+                            <i className="fa fa-edit"></i> Kết quả phân loại<span className="fa fa-chevron-down" />
+                          </a>
+                          <ul
+                            className="nav child_menu"
+                            style={{ display: activeSideItem === 'thirdParty' ? 'block' : 'none' }}
+                          >
+                            <li><Link to="/modification-report">Xem kết quả</Link></li>
+                          </ul>
+                        </li>
+                      )
+                    }
+                    {
+                      !isCompany && (
+                        <li
+                          key="api"
+                          className={`${activeSideItem === 'api' ? 'active' : ''}`}
+                          onClick={() => onSidebarClick('api')}
+                        >
+                          <a>
+                            <i className="fa fa-edit"></i> API<span className="fa fa-chevron-down" />
+                          </a>
+                          <ul
+                            className="nav child_menu"
+                            style={{ display: activeSideItem === 'api' ? 'block' : 'none' }}
+                          >
+                            <li><Link to="/api-info">Thông tin tài khoản</Link></li>
+                            <li><Link to="/api-documentation">Tài liệu API</Link></li>
+                          </ul>
+                        </li>
+                      )
+                    }
                   </ul>
                 </div>              
               </div>

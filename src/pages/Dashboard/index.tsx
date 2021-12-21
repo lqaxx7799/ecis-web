@@ -1,10 +1,12 @@
 import { Helmet } from "react-helmet";
+import { useAppSelector } from "../../app/store";
 
 type Props = {
 
 };
 
 const Dashboard = (props: Props) => {
+  const { role } = useAppSelector((state) => state.authentication);
   return (
     <div className="row">
       <Helmet>
@@ -86,48 +88,52 @@ const Dashboard = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className="col-md-6">
-        <div className="x_panel">
-          <div className="x_title">
-            <h4>Kết quả phân loại<small></small></h4>                  
-            <div className="clearfix"></div>
-          </div>
-          <div className="x_content">
-            <div className="col-md-12 col-sm-12 col-xs-12">
-              <div className="col-xs-12 table">
-                <table className="col-xs-12 table">
-                  <thead>
-                    <tr>
-                      <th>STT</th>
-                      <th>Tên tiêu chí</th>
-                      <th>Kết quả</th>
-                      <th>Ghi chú</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td colSpan={3}>Tuân thủ quy định của pháp luật về hồ sơ khai thác gỗ đối với doanh nghiệp chế biến và xuất khẩu gỗ trực tiếp khai thác gỗ làm nguyên liệu chế biến</td>
-                    </tr>
-                    <tr>
-                      <td>a</td>
-                      <td>Chấp hành quy định về trình tự, thủ tục khai thác gỗ</td>
-                      <td><strong>Đạt</strong></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>b</td>
-                      <td>Bảng kê gỗ theo quy định của pháp luậ</td>
-                      <td><strong>Không đạt</strong></td>
-                      <td>Nội dung không rõ ràng</td>
-                    </tr>
-                  </tbody>
-                </table>
+      {
+        role?.roleName === 'Company' && (
+          <div className="col-md-6">
+            <div className="x_panel">
+              <div className="x_title">
+                <h4>Kết quả phân loại<small></small></h4>                  
+                <div className="clearfix"></div>
+              </div>
+              <div className="x_content">
+                <div className="col-md-12 col-sm-12 col-xs-12">
+                  <div className="col-xs-12 table">
+                    <table className="col-xs-12 table">
+                      <thead>
+                        <tr>
+                          <th>STT</th>
+                          <th>Tên tiêu chí</th>
+                          <th>Kết quả</th>
+                          <th>Ghi chú</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td colSpan={3}>Tuân thủ quy định của pháp luật về hồ sơ khai thác gỗ đối với doanh nghiệp chế biến và xuất khẩu gỗ trực tiếp khai thác gỗ làm nguyên liệu chế biến</td>
+                        </tr>
+                        <tr>
+                          <td>a</td>
+                          <td>Chấp hành quy định về trình tự, thủ tục khai thác gỗ</td>
+                          <td><strong>Đạt</strong></td>
+                          <td></td>
+                        </tr>
+                        <tr>
+                          <td>b</td>
+                          <td>Bảng kê gỗ theo quy định của pháp luậ</td>
+                          <td><strong>Không đạt</strong></td>
+                          <td>Nội dung không rõ ràng</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        )
+      }
     </div>
   );
 };

@@ -97,12 +97,12 @@ const LogIn = () => {
                 <div className="clearfix"></div>
 
                 <div className="separator">
-                  {/* <p className="change_link">Chưa có tài khoản ?
-                    <a href="#signup" className="to_register"> Tạo mới </a>
+                  <p className="change_link">Chưa có tài khoản ?
+                    <a href="#signup" className="to_register"> Đăng ký </a>
                   </p>
 
                   <div className="clearfix"></div>
-                  <br /> */}
+                  <br />
 
                   <div>
                     <p>©2020</p>
@@ -114,21 +114,25 @@ const LogIn = () => {
 
           <div id="register" className="animate form registration_form">
             <section className="login_content">
-              <form>
-                <h1>Tạo tài khoản</h1>
-                <div>
-                  <input type="text" className="form-control" placeholder="Tên đăng nhập" required />
-                </div>
-                <div>
-                  <input type="email" className="form-control" placeholder="Email" required />
-                </div>
-                <div>
-                  <input type="password" className="form-control" placeholder="Mật khẩu" required />
-                </div>
-                <div>
-                  <a className="btn btn-default submit" href="index.html">Đăng ký</a>
-                </div>
-
+              <div>
+                <h1>Đăng ký sử dụng hệ thống</h1>
+                <p>
+                  <h3>Đối với doanh nghiệp</h3>
+                  <div>
+                    Vui lòng soạn mail đăng ký sử dụng hệ thống đến hòm thư <a href="mailto:lqaxx000@gmail.com">lqaxx000@gmail.com</a>.
+                    Nội dung của mail vui lòng bao gồm tên doanh nghiệp, mã doanh nghiệp, email đăng ký và tỉnh doanh nghiệp đang hoạt động.
+                    Cán bộ phía hệ thống sẽ đăng ký tài khoản cho doanh nghiệp và gửi lại thông tin đăng nhập qua email sử dụng để đăng ký.
+                  </div>
+                </p>
+                <p>
+                  <h3>Đối với bên thụ hưởng</h3>
+                  <div>
+                    Vui lòng soạn mail đăng ký sử dụng hệ thống đến hòm thư <a href="mailto:lqaxx000@gmail.com">lqaxx000@gmail.com</a>.
+                    Nội dung của mail vui lòng bao gồm tên, email của cá nhân muốn đăng ký sử dụng dữ liệu của hệ thống.
+                    Cán bộ phía hệ thống sẽ đăng ký tài khoản cho cá nhân và gửi lại thông tin đăng nhập qua email sử dụng để đăng ký.
+                  </div>
+                </p>
+                <p>Mọi thắc mắc vui lòng liên hệ qua đường dây nóng <a href="tel:0976176490">0976 176 490</a>.</p>
                 <div className="clearfix"></div>
 
                 <div className="separator">
@@ -140,11 +144,10 @@ const LogIn = () => {
                   <br />
 
                   <div>
-                  
                     <p>©2020</p>
                   </div>
                 </div>
-              </form>
+              </div>
             </section>
           </div>
         </div>
