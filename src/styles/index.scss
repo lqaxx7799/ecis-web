@@ -134,6 +134,15 @@ body {
   background: #555;
 }
 
+.swagger-ui {
+  .information-container.wrapper {
+    display: none;
+  }
+  .wrapper {
+    margin: unset;
+  }
+}
+
 @media only screen and (max-width: 767px) {
   .wrapper {
     grid-template-columns: 1fr calc(100% - 48px) 1fr;
