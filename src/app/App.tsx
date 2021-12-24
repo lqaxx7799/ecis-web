@@ -70,7 +70,7 @@ const App = () => {
         <AppRoute path="/modification-report" component={ModificationReport} layout={MainLayout} needAuth roles={["ThirdParty"]} />
         
         <AppRoute path="/api-info" component={ApiInfo} layout={MainLayout} needAuth roles={["ThirdParty"]} />
-        <AppRoute path="/api-documentation" component={ApiDocumentation} layout={MainLayout} needAuth roles={["ThirdParty"]} />
+        <AppRoute path="/api-documentation" component={ApiDocumentation} layout={MainLayout} />
 
         <AppRoute exact path='/' component={Dashboard} layout={MainLayout} needAuth roles={["Company", "ThirdParty"]} />
         <AppRoute component={NotFound} layout={MainLayout} needAuth roles={["Company", "ThirdParty"]} />

@@ -17,17 +17,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/ThirdParty"
+                  "$ref": "#/components/schemas/PublicV1ThirdPartyDTO"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ThirdParty"
+                  "$ref": "#/components/schemas/PublicV1ThirdPartyDTO"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ThirdParty"
+                  "$ref": "#/components/schemas/PublicV1ThirdPartyDTO"
                 }
               }
             }
@@ -341,59 +341,9 @@
   },
   "components": {
     "schemas": {
-      "Role": {
+      "PublicV1ThirdPartyDTO": {
         "type": "object",
         "properties": {
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "roleName": {
-            "type": "string",
-            "nullable": true
-          },
-          "description": {
-            "type": "string",
-            "nullable": true
-          },
-          "hasManagement": {
-            "type": "boolean"
-          },
-          "accounts": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Account"
-            },
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "Account": {
-        "type": "object",
-        "properties": {
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
           "id": {
             "type": "integer",
             "format": "int32"
@@ -401,44 +351,6 @@
           "email": {
             "type": "string",
             "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "isVerified": {
-            "type": "boolean"
-          },
-          "roleId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "role": {
-            "$ref": "#/components/schemas/Role"
-          },
-          "thirdParty": {
-            "$ref": "#/components/schemas/ThirdParty"
-          }
-        },
-        "additionalProperties": false
-      },
-      "ThirdParty": {
-        "type": "object",
-        "properties": {
-          "isDeleted": {
-            "type": "boolean"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "id": {
-            "type": "integer",
-            "format": "int32"
           },
           "userName": {
             "type": "string",
@@ -455,12 +367,9 @@
           "isActive": {
             "type": "boolean"
           },
-          "accountId": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "account": {
-            "$ref": "#/components/schemas/Account"
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
           }
         },
         "additionalProperties": false
