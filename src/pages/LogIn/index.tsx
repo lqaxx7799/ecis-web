@@ -91,7 +91,7 @@ const LogIn = () => {
                 </div>
                 <div>
                   <button className="btn btn-default submit">Đăng nhập</button>
-                  <a className="reset_pass" href="#">Quên mật khẩu ?</a>
+                  {/* <a className="reset_pass" href="#">Quên mật khẩu ?</a> */}
                 </div>
 
                 <div className="clearfix"></div>
